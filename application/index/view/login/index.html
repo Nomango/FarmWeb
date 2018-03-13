@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+</head>
+<body>
+    <form action="{:url('login')}" method="post">
+        <label for="username">账号:</label><input type="text" name="username" id="username" />
+        <label for="password">密码:</label><input type="password" name="password" id="password" />
+        <button type="submit">登陆</button>
+        <a href="{:url('Register/index')}">注册</a>
+    </form>
+</body>
+</html>

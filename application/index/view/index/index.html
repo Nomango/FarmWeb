@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>农副产品直卖网</title>
+    <link rel="__STATIC__/semantic/semantic.min.css" type="text/css">
+    <link rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap.min.css">
+    <script src="__STATIC__/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
+</head>
+<body class="pushable">
+    <div class="pusher">
+        <div class="ui main text">哈哈哈哈</div>
+        {if condition="$Think.session.userId"}
+            <a href="{:url('Login/logOut')}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>&nbsp;注销</a>
+        {else /}
+            <a href="{:url('Login/index')}" class="btn btn-primary">&nbsp;登录</a>
+            <a href="{:url('Register/index')}" class="btn btn-default">&nbsp;注册</a>
+        {/if}
+    </div>
+</body>
+</html>

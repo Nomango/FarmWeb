@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户后台管理</title>
+    <link rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap.min.css">
+    <script src="__STATIC__/jquery/jquery-3.3.1.min.js"></script>
+    <script>
+        function deleteUser(id) {
+            if (confirm('是否确认删除？')) {
+                $.ajax({
+                    data: { id: id },
+                    url:'{:url("deleteUser")}',
+                    success: function (data) {
+                        alert(data['msg']);
+                        window.location.reload();
+                    }
+                })
+            }
+        }
+    </script>
+</head>
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <hr />
+        <a href="{:url('AdminLogin/logOut')}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>&nbsp;注销</a>
+        <hr />
+        <table class="table table-hover table-bordered">
+            <tr class="info">
+                <th>序号</th>
+                <th>账号</th>
+                <th>性别</th>
+                <th>用户名</th>
+                <th>邮箱</th>
+                <th>手机号</th>
+                <th>操作</th>
+            </tr>
+            {volist name="users" id="user" key="key"}
+            <tr>
+                <td>{$key}</td>
+                <td>{$user.username}</td>
+                <td>{eq name='$user.sex' value='0'}男{else /}女{/eq}</td>
+                <td>{$user.nickname}</td>
+                <td>{$user.email}</td>
+                <td>{$user.phone}</td>
+                <td><a href="javascript:void(0)" onclick="deleteUser('{$user.id}')">删除</a></td>
+            </tr>
+            {/volist}
+        </table>
+        {$users->render()}
+    </div>
+</div>
+</body>
+</html>

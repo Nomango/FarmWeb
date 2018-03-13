@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+
+<body class="container">
+<div class="row">
+    <div class="col-md-12">
+        <form action="register" method="post">
+            <label>账号:</label>
+            <input type="text" name="username" />
+            <label>昵称:</label>
+            <input type="text" name="nickname" />
+            <label>密码:</label>
+            <input type="password" name="password" />
+            <label>性别:</label>
+            <select name="sex">
+                <option value="0">男</option>
+                <option value="1">女</option>
+            </select>
+            <label>邮箱:</label>
+            <input type="email" name="email" />
+            <label>手机:</label>
+            <input type="text" name="phone" />
+            <button type="submit">保存</button>
+            <a href="{:url('Login/index')}">已有账号</a>
+        </form>
+    </div>
+</div>
+</body>
+
+</html>
