@@ -10,6 +10,8 @@ namespace app\index\controller;
 
 
 use think\Controller;
+use think\Request;
+use app\common\model\User;
 
 class RegisterController extends Controller
 {
@@ -22,16 +24,23 @@ class RegisterController extends Controller
     {
         $post = Request::instance()->post();
 
+        // 验证用户是否存在
+        $checkuser = User::get(['username' => $post['username']]);
+        if (!is_null($checkuser)) {
+            return json(['result'=>false, 'msg'=>'该账号已被注册']);
+        }
+
         $User = new User();
         $userData = $User->data($post);
+        $userData['password'] = User::encryptPassword($userData['password']);
 
         // 向user表中插入数据并判断是否插入成功
-        $result = $User->validate(true)->save($userData->getData());
+        $result = $User->validate()->save($userData->getData());
         if ($result) {
-            return '新增用户成功，用户名为'.$User['nickname'].'，新增用户ID为'.$User['id'];
+            return json(['result'=>true]);
         }
         else {
-            return '新增失败';
+            return json(['result'=>false, 'msg'=>'注册出现未知错误']);
         }
     }
 }

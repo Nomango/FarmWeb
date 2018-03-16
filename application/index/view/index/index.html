@@ -6,16 +6,93 @@
     <link rel="__STATIC__/semantic/semantic.min.css" type="text/css">
     <link rel="stylesheet" href="__STATIC__/bootstrap/css/bootstrap.min.css">
     <script src="__STATIC__/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <style>
+        .header {
+            height: 70px;
+            padding: 0 50px;
+            -webkit-box-shadow: 0 1px 2px 0 rgba(34,36,38,0.35);
+            -moz-box-shadow: 0 1px 2px 0 rgba(34,36,38,0.35);
+            box-shadow: 0 1px 2px 0 rgba(34,36,38,0.35);
+        }
+        .header-nav {
+            float: right;
+        }
+        .header-nav .header-btn {
+            display: inline-block;
+            height: 70px;
+            padding: 25px 30px;
+            font-size: 16px;
+            line-height: 30px;
+            color: #353535;
+            transition: all .5s ease;
+        }
+        .header-nav .header-btn:hover {
+            background-color: #8bc34a;
+            color: #fff;
+        }
+        .header-nav .header-btn-focus {
+            display: inline-block;
+            height: 70px;
+            padding: 25px 30px;
+            font-size: 16px;
+            line-height: 30px;
+            color: #fff;
+            transition: all .5s ease;
+            background-color: #8bc34a;
+        }
+        .header .user-box {
+            display: inline-block;
+            height: 70px;
+            line-height: 30px;
+        }
+        .header .user-panel {
+            overflow: hidden;
+            height: 0;
+            transition: all .5s ease;
+            margin: 0;
+        }
+        .header .user-name {
+            display: inline-block;
+            font-size: 16px;
+        }
+        .header .user-box:hover .user-panel {
+            height: 120px;
+        }
+        .header .btn-login-register {
+            display: inline-block;
+            font-size: 16px;
+            width: 60px;
+            text-align: center;
+            color: #353535;
+            transition: all .3s ease;
+        }
+        .header .btn-login-register:hover {
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body class="pushable">
+    <header class="header">
+        <img src="__STATIC__/images/logo.jpg" alt="LOGO" style="height:60px;">
+        <nav class="header-nav">
+            <a href=""><li class="header-btn-focus" >首页</li></a><a href=""><li class="header-btn">交易大厅</li></a><a href=""><li class="header-btn">联系我们</li></a>
+            {if condition="$Think.session.userId"}
+            <div class="user-box">
+                <a class="user-name" href="">昵称</a>
+                <ul class="user-panel">
+                    <li>个人资料</li>
+                    <li>订单管理</li>
+                    <a href="{:url('Login/logout')}"><li>退出</li></a>
+                </ul>
+            </div>
+            {else /}
+            <a href="{:url('Login/index')}"><div class="btn-login-register">登录</div></a>
+            <a href="{:url('Register/index')}"><div class="btn-login-register">注册</div></a>
+            {/if}
+        </nav>
+    </header>
     <div class="pusher">
         <div class="ui main text">哈哈哈哈</div>
-        {if condition="$Think.session.userId"}
-            <a href="{:url('Login/logOut')}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>&nbsp;注销</a>
-        {else /}
-            <a href="{:url('Login/index')}" class="btn btn-primary">&nbsp;登录</a>
-            <a href="{:url('Register/index')}" class="btn btn-default">&nbsp;注册</a>
-        {/if}
     </div>
 </body>
 </html>

@@ -13,6 +13,8 @@ use think\Model;
 
 class User extends Model
 {
+    protected $auto = ['create_time', 'update_time'];
+
     static public function login($username, $password)
     {
         // 验证用户是否存在

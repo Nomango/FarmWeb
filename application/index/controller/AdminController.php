@@ -12,6 +12,8 @@ namespace app\index\controller;
 use think\Controller;
 use app\common\Model\Admin;
 use app\common\Model\User;
+use app\common\model\Goods;
+use app\common\model\Order;
 use think\Request;
 
 class AdminController extends Controller
@@ -31,16 +33,29 @@ class AdminController extends Controller
     {
         $pageSize = 5; // 每页显示5条数据
 
-        // 实例化User
+        $Order = new Order;
+        $orders = $Order->with(['user','goods'])->paginate($pageSize);
+        $this->assign('orders', $orders);
+        return $this->fetch();
+    }
+
+    public function usermanage()
+    {
+        $pageSize = 5; // 每页显示5条数据
+
         $User = new User;
-
-        // 按条件查询数据并调用分页
         $users = $User->paginate($pageSize);
-
-        // 向V层传数据
         $this->assign('users', $users);
+        return $this->fetch();
+    }
 
-        // 将数据返回给用户
+    public function goodsmanage()
+    {
+        $pageSize = 5; // 每页显示5条数据
+
+        $Goods = new Goods;
+        $goods = $Goods->with(['category','image'])->paginate($pageSize);
+        $this->assign('goods', $goods);
         return $this->fetch();
     }
 

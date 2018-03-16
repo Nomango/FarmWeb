@@ -14,9 +14,8 @@ use think\Validate;
 class User extends Validate
 {
     protected $rule = [
-        'username' => 'require|unique:user|length:4,25',
-        'nickname'  => 'require|length:2,25',
-        'password'  => 'require|length:4,16',
+        'username' => 'require|unique:user|length:4,16',
+        'nickname'  => 'require|length:2,10',
         'sex' => 'in:0,1',
         'email' => 'email',
     ];

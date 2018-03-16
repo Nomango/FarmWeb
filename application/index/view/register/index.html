@@ -4,32 +4,166 @@
 <head>
     <meta charset="UTF-8">
     <title>注册</title>
+    <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/lib/layer/layer.js"></script>
+    <link rel="stylesheet" href="__STATIC__/css/inputbox.css">
+    <style>
+        .input-box {
+            height: 670px;
+        }
+    </style>
 </head>
 
-<body class="container">
-<div class="row">
-    <div class="col-md-12">
-        <form action="register" method="post">
-            <label>账号:</label>
-            <input type="text" name="username" />
-            <label>昵称:</label>
-            <input type="text" name="nickname" />
-            <label>密码:</label>
-            <input type="password" name="password" />
-            <label>性别:</label>
-            <select name="sex">
-                <option value="0">男</option>
-                <option value="1">女</option>
-            </select>
-            <label>邮箱:</label>
-            <input type="email" name="email" />
-            <label>手机:</label>
-            <input type="text" name="phone" />
-            <button type="submit">保存</button>
-            <a href="{:url('Login/index')}">已有账号</a>
-        </form>
+<body>
+<div class="input-box">
+    <div class="input-box-title">
+        <span>注册</span>
+        <a href="{:url('Login/index')}" style="font-size:16px;color:#bdbdbd;text-decoration:none;">/登陆</a>
     </div>
+    <input id="user-name" class="input-box-text" type="text" placeholder="账号（仅限英文和数字，长度4~16）" onblur="checkUserName()" />
+    <input id="user-nickname" class="input-box-text" type="text" placeholder="昵称（长度2~10）" onblur="checkUserNickname()" />
+    <input id="user-pswd" class="input-box-text" type="password" placeholder="密码（仅限英文和数字，长度6~20）" onblur="checkPassword()" />
+    <input id="user-pswd-confirm" class="input-box-text" type="password" placeholder="确认密码" onblur="checkConfirmPassword()" />
+    <select id="user-sex" class="input-box-select">
+        <option value="0">男</option>
+        <option value="1">女</option>
+    </select>
+    <input id="user-email" class="input-box-text" type="email" placeholder="邮箱（选填）" onblur="checkEmail()" />
+    <input id="user-phone" class="input-box-text" type="text" placeholder="手机号（选填）" onblur="checkPhone()" />
+    <button class="input-box-btn" type="submit">注册</button>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.input-box-btn').click(function () {
+            if (checkAll()) {
+                $.ajax({
+                    method: "POST",
+                    data: {
+                        username: $('#user-name').val(),
+                        nickname: $('#user-nickname').val(),
+                        password: $('#user-pswd').val(),
+                        sex: parseInt($('#user-sex').find("option:selected").val()),
+                        email: $('#user-email').val(),
+                        phone: $('#user-phone').val()
+                    },
+                    url: '{:url("register")}',
+                    success: function (data) {
+                        if (data['result']) {
+                            layer.alert('注册成功，两秒后自动跳转到登录页', {
+                                icon: 1,
+                                end: function () {location.href = "{:url('Login/index')}";}
+                            });
+                            setTimeout(function () {
+                                location.href = "{:url('Login/index')}";
+                            }, 2000);
+                        } else {
+                            layer.alert(data['msg'], {icon:5});
+                        }
+                    },
+                    error: function () {
+                        layer.alert('服务器飘去远方了...', {icon:5});
+                    }
+                });
+            }
+        });
+    });
+    // 全部检验
+    function checkAll() {
+        return checkUserName() &&
+        checkUserNickname() &&
+        checkPassword() &&
+        checkConfirmPassword() &&
+        checkEmail() &&
+        checkPhone();
+    }
+    // 检验用户名
+    function checkUserName() {
+        var username = $('#user-name').val();
+        var msg = '';
+        var reg = new RegExp(/^[0-9A-Za-z]+$/);
+        if (username === '') {
+            msg = '此项不能为空';
+        } else if (username.length < 4 || username.length > 16) {
+            msg = '长度为4~16';
+        } else if (!reg.test(username)) {
+            msg = '仅能为英文或数字';
+        }
+        if (msg === '') {
+            return true;
+        } else {
+            layer.tips(msg, '#user-name', {tips: [3, '#ffc107']});
+            return false;
+        }
+    }
+    // 检验用户昵称
+    function checkUserNickname() {
+        var nickname = $('#user-nickname').val();
+        var msg = '';
+        var reg = new RegExp(/[~#^$@%&!*()<>:;'"{}【】  ]/gi);
+        if (nickname === '') {
+            msg = '此项不能为空';
+        } else if (nickname.length < 2 || nickname.length > 10) {
+            msg = '长度为2~10';
+        } else if (reg.test(nickname)) {
+            msg = '不允许有特殊字符';
+        }
+        if (msg === '') {
+            return true;
+        } else {
+            layer.tips(msg, '#user-nickname', {tips: [3, '#ffc107']});
+            return false;
+        }
+    }
+    // 检验密码
+    function checkPassword() {
+        var pswd = $('#user-pswd').val();
+        var msg = '';
+        var reg = new RegExp(/^(\w){6,20}$/);
+        if (pswd === '') {
+            msg = '此项不能为空';
+        } else if (pswd.length < 6 || pswd.length > 20) {
+            msg = '长度为6~20';
+        } else if (!reg.test(pswd)) {
+            msg = '不允许有特殊字符';
+        }
+        if (msg === '') {
+            return true;
+        } else {
+            layer.tips(msg, '#user-pswd', {tips: [3, '#ffc107']});
+            return false;
+        }
+    }
+    // 检查确认密码
+    function checkConfirmPassword() {
+        if ($('#user-pswd').val() === $('#user-pswd-confirm').val()) {
+            return true;
+        } else {
+            layer.tips('两次输入的密码不相同', '#user-pswd-confirm', {tips: [3, '#ffc107']});
+            return false;
+        }
+    }
+    // 检验邮箱
+    function checkEmail() {
+        var email = $('#user-email').val();
+        var reg = new RegExp(/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/);
+        if (!reg.test(email) && email !== '') {
+            layer.tips('请填写正确的邮箱', '#user-email', {tips: [3, '#ffc107']});
+            return false;
+        } else {
+            return true;
+        }
+    }
+    // 检验手机号
+    function checkPhone() {
+        var phone = $('#user-phone').val();
+        var reg = new RegExp(/^1[34578]\d{9}$/);
+        if (!reg.test(phone) && phone !== '') {
+            layer.tips('请填写正确的手机号', '#user-phone', {tips: [3, '#ffc107']});
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
 </body>
-
 </html>

@@ -28,7 +28,7 @@ class AdminLoginController extends Controller
         $result = Admin::login($postData['account'], $postData['password']);
         // 根据不同结果跳转不同页面
         if ($result) {
-            return $this->success('登陆成功', url('Admin/index'));
+            return $this->redirect(url('Admin/index'));
         } else {
             return $this->error('用户名不存在', url('index'));
         }
@@ -37,11 +37,8 @@ class AdminLoginController extends Controller
     // 注销
     public function logOut()
     {
-        if (Admin::logOut()) {
-            return $this->success('注销成功', url('index'));
-        } else {
-            return $this->error('注销异常', url('index'));
-        }
+        Admin::logOut();
+        return $this->redirect(url('index'));
     }
 
     public function test()

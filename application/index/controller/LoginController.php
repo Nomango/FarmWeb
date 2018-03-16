@@ -30,20 +30,17 @@ class LoginController extends Controller
         $result = User::login($postData['username'], $postData['password']);
         // 根据不同结果跳转不同页面
         if ($result) {
-            return $this->success('登陆成功', url('Index/index'));
+            return json(['result' => true]);
         } else {
-            return $this->error('用户名不存在', url('index'));
+            return json(['result' => false]);
         }
     }
 
     // 注销
     public function logOut()
     {
-        if (User::logOut()) {
-            return $this->success('注销成功', url('index'));
-        } else {
-            return $this->error('注销异常', url('Index/index'));
-        }
+        User::logOut();
+        return $this->redirect(url('index'));
     }
 
     public function test()

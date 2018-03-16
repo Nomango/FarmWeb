@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户后台管理</title>
+    <link rel="stylesheet" href="__STATIC__/lib/bootstrap/css/bootstrap.min.css">
+    <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="__STATIC__/css/admin_index.css">
+</head>
+<body>
+<div class="admin_box">
+    <div class="nav">
+        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'index\')}'">订单管理</button>
+        <button class="nav_btn nav_btn_focus">用户管理</button>
+        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'goodsmanage\')}'">商品管理</button>
+    </div>
+    <div class="content">
+    <div class="card" style="display: block;">
+        <div style="width: 100%;height: 90%">
+            <div class="card_title">
+                <p class="card_title_p" style="margin-left:5%;">用户管理</p>
+                <div style="display:inline-block;float:right;margin-right: 5%;">
+                    <p class="card_title_p1">管理员账号：</p><span class="card_title_p1">sss</span><span class="card_title_p1"></span>
+                    <a href="{:url('AdminLogin/logOut')}" class="btn btn-primary"><i class="glyphicon glyphicon-remove"></i>&nbsp;注销</a>
+                </div>
+            </div>
+            <div class="card_nav">
+                <p class="card_nav_p">账号</p>
+                <p class="card_nav_p">昵称</p>
+                <p class="card_nav_p">性别</p>
+                <p class="card_nav_p">邮箱</p>
+                <p class="card_nav_p">手机号</p>
+                <p class="card_nav_p">操作</p>
+            </div>
+            {volist name="users" id="user"}
+            <div class="card_content">
+                <p class="card_nav_p ">{$user.username}</p>
+                <p class="card_nav_p">{$user.nickname}</p>
+                <p class="card_nav_p">{eq name='$user.sex' value='0'}男{else /}女{/eq}</p>
+                <p class="card_nav_p">{$user.email}</p>
+                <p class="card_nav_p">{$user.phone}</p>
+                <div class="card_nav_p card_operation">
+                    <span class="user_operation" href="javascript:void(0)" onclick="user_detail()">详情</span>
+                    <span class="user_operation" href="javascript:void(0)" onclick="user_delete('{$user.id}')">删除</span>
+                </div>
+            </div>
+            {/volist}
+        </div>
+        <div style="width: 100%;height: 10%;">
+            {$users->render()}
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<script>
+    function user_detail() {}
+    function user_delete(id) {
+        if (confirm('是否确认删除？')) {
+            $.ajax({
+                data: { id: id },
+                url:'{:url("deleteUser")}',
+                success: function (data) {
+                    alert(data['msg']);
+                    window.location.reload();
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

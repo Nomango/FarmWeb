@@ -13,5 +13,13 @@ use think\Model;
 
 class Goods extends Model
 {
+    public function category()
+    {
+        return $this->belongsTo('category', 'category_id', 'id');
+    }
 
+    public function image()
+    {
+        return $this->hasOne('image', 'id', 'image_id');
+    }
 }

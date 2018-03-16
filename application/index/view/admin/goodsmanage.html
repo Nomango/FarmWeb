@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户后台管理</title>
+    <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="__STATIC__/css/admin_index.css">
+</head>
+<body>
+<div class="admin_box">
+    <div class="nav">
+        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'index\')}'">订单管理</button>
+        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'usermanage\')}'">用户管理</button>
+        <button class="nav_btn nav_btn_focus">商品管理</button>
+    </div>
+    <div class="content">
+    <div class="card" style="display: block">
+        <div style="display: block;width: 100%;height: 100%" id="commodity_list">
+            <div style="width: 100%;height: 90%">
+                <div class="card_title">
+                    <p class="card_title_p" style="margin-left: 5%">商品管理</p>
+                </div>
+                <div class="card_nav">
+                    <p class="card_nav_p ">产品</p>
+                    <p class="card_nav_p ">价格</p>
+                    <p class="card_nav_p ">库存</p>
+                    <p class="card_nav_p ">总销量</p>
+                    <p class="card_nav_p ">创建时间</p>
+                    <p class="card_nav_p ">操作</p>
+                </div>
+                {volist name="goods" id="g"}
+                <div class="card_content">
+                    <div class="card_nav_p">
+                        <img src="{$g.image.url}" class="commodity_img">
+                        <div class="commodity_desc">
+                            <p class="commodity_p">{$g.name}</p>
+                            <p class="commodity_p">{$g.number}</p>
+                        </div>
+                    </div>
+                    <p class="card_nav_p ">{$g.name}</p>
+                    <p class="card_nav_p ">{$g.price}</p>
+                    <p class="card_nav_p ">{$g.number}</p>
+                    <p class="card_nav_p ">{$g.category.name}</p>
+                    <p class="card_nav_p " style="color: #2e6da4;font-size: 14px">编辑产品</p>
+                </div>
+                {/volist}
+            </div>
+            <div style="width: 100%;height: 10%;">
+                <button class="page_btn" style="float: left;margin-left: 5%" id="add_commodity">上架</button>
+                <button class="page_btn">下页</button>
+                <button class="page_btn">上页</button>
+            </div>
+        </div>
+        <div style="display: none" id="commodidy">
+            <div class="commodity_list">
+                <p class="commodity_list_p">产品名称:</p>
+                <input type="text" class="commodity_list_input">
+            </div>
+            <div class="commodity_list">
+                <p class="commodity_list_p">产品价格:</p>
+                <input type="text" class="commodity_list_input">
+            </div>
+            <div class="commodity_list">
+                <p class="commodity_list_p">产品数量:</p>
+                <input type="text" class="commodity_list_input">
+            </div>
+            <div class="commodity_list">
+                <p class="commodity_list_p">产品分类:</p>
+                <input type="text" class="commodity_list_input">
+            </div>
+            <button class="commodity_add" id="commodity_add">确定添加</button>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $("#add_commodity").click(function () {
+        $("#commodity_list").css('display','none');
+        $("#commodidy").css('display','block');
+    })
+    $("#commodity_add").click(function () {
+        $("#commodidy").css('display','none');
+        $("#commodity_list").css('display','block');
+    })
+</script>
+</body>
+</html>
