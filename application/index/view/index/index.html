@@ -29,6 +29,11 @@
         .swiper-container .swiper-button:hover {
             background-size: 20px 30px;
         }
+        .swiper-container-nav {
+            width: 600px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
         .nav{
             width: 100%;
             height: 75px;
@@ -108,8 +113,6 @@
         {/if}
     </div>
 </header>
-
-
 <section class="swiper-container">
     <div class="swiper-wrapper">
         <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner1.jpg')"></div>
@@ -126,220 +129,20 @@
 </section>
 <section class="nav">
     <div class="nav_box">
-        <a  class="nav_a nav_a_focus" onclick="change(1)" id="a1">标题一</a><a  class="nav_a" onclick="change(2)" id="a2">标题二</a><a  class="nav_a" onclick="change(3)" id="a3">标题三</a>
+        <div class="swiper-pagination-nav"></div>
     </div>
 </section>
-<section class="content" id="content_1">
-    <div class="content_box" >
-        <div class="content_card">
+<section class="swiper-container-nav">
+    <div class="swiper-wrapper" >
+        {for start="0" end="36" name="i"}
+        <div class="swiper-slide content_card">
             <img src="__STATIC__/image/default.jpg" class="content_img">
             <div class="content_info">
-                <p class="content_info_p">名称</p>
+                <p class="content_info_p">名称{$i}</p>
                 <p class="content_info_p">价格</p>
             </div>
         </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="content" id="content_2" style="display: none">
-    <div class="content_box">
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-
-
-    </div>
-</section>
-<section class="content" id="content_3" style="display: none">
-    <div class="content_box">
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-        <div class="content_card">
-            <img src="__STATIC__/image/default.jpg" class="content_img">
-            <div class="content_info">
-                <p class="content_info_p">名称</p>
-                <p class="content_info_p">价格</p>
-            </div>
-        </div>
-
-
-
+        {/for}
     </div>
 </section>
 <footer class="footer">
@@ -381,27 +184,24 @@
             prevEl: '.swiper-button-prev',
         },
     });
-</script>
-<script>
-    var change = function (id) {
-        if(id==1){
-            $("#a1").addClass("nav_a_focus");
-            $("#a2").removeClass("nav_a_focus");
-            $("#a3").removeClass("nav_a_focus");
-            $("#content_1").css('display','block');
-        }
-        else if(id==2){
-            $("#a2").addClass("nav_a_focus");
-            $("#a1").removeClass("nav_a_focus");
-            $("#a3").removeClass("nav_a_focus");
-            $("#content_2").css('display','block');
-        }
-        else if(id==3){
-            $("#a3").addClass("nav_a_focus");
-            $("#a1").removeClass("nav_a_focus");
-            $("#a2").removeClass("nav_a_focus");
-            $("#content_3").css('display','block');
-        }
-    };
+    // 导航栏
+    new Swiper ('.swiper-container-nav', {
+        direction: 'horizontal',
+        width: 600,
+        slidesPerView : 4,  // 一行四个
+        slidesPerColumn: 3, // 显示三行
+        spaceBetween : 20,   // 间隔 20px
+        slidesPerGroup: 4,  // 4个一组
+        pagination: {
+            el: '.swiper-pagination-nav',
+            clickable: true,
+            bulletClass : 'nav_a',
+            bulletActiveClass: 'nav_a_focus',
+            renderBullet: function (index, className) {
+                return '<span class="' + className + '">标题' + (index + 1) + '</span>';
+            }
+        },
+        uniqueNavElements: false,
+    });
 </script>
 </html>
