@@ -97,15 +97,13 @@
         <a href="" class="header_a header_a_focus">首页
         </a><a href="" class="header_a">交易大厅
     </a><a href="" class="header_a">联系我们
-    </a>{if condition="$Think.session.userId" }<div href="" class="header_a" style="width: 180px;position:relative;" id="header_a_">
-        <p style="display: inline-block;font-size: 14px;color: #9e9e9e">昵称</p>
+    </a>{if condition="$isLogin" }<div href="" class="header_a" style="width: 180px;position:relative;" id="header_a_">
+        <p style="display: inline-block;font-size: 14px;color: #9e9e9e">{$user.nickname}</p>
         <img src="__STATIC__/image/down.png" style="display: inline-block;width: 14px;vertical-align: middle">
         <div class="header_a_list" id="header_a_list">
             <a href="{:url('User/index')}" class="header_a_list_a">个人资料</a>
             <a href="" class="header_a_list_a">我的订单</a>
-            <a href="" class="header_a_list_a">分类一组</a>
-            <a href="" class="header_a_list_a">分类一组</a>
-            <a href="" class="header_a_list_a">退出</a>
+            <a href="{:url('Login/logOut')}" class="header_a_list_a">退出</a>
         </div>
         </div>
         {else/}
@@ -146,22 +144,21 @@
     </div>
 </section>
 <footer class="footer">
-    <p class="footer_p" style="font-size: 30px;">About</p>
-    <div class="footer_box">
-        <div class="footer_box_left">
-            <p style="text-align: center; color: #EEEEEE; font-size: 16px">友情链接</p>
-            <div class="footer_box_rectangle"></div>
-            <div class="footer_box_rectangle"></div>
-            <div class="footer_box_rectangle"></div>
+    <div class="footer_container">
+        <div class="footer_box">
+            <div class="footer_box_title">友情链接</div>
+            <p class="footer_box_p">123456</p>
+            <p class="footer_box_p">123456</p>
+            <p class="footer_box_p">123456</p>
         </div>
-        <div class="footer_box_left" style="float: right">
-            <p style="text-align: center; color: #EEEEEE; font-size: 16px">联系我们</p>
-            <div class="footer_box_rectangle"></div>
-            <div class="footer_box_rectangle"></div>
-            <div class="footer_box_rectangle"></div>
+        <div class="footer_box" style="float: right">
+            <div class="footer_box_title">联系我们</div>
+            <p class="footer_box_p">123456</p>
+            <p class="footer_box_p">123456</p>
+            <p class="footer_box_p">123456</p>
         </div>
     </div>
-    <p class="footer_p">Copyright© 1997-2018 CoolCoder All Rights Reserved()</p>
+    <p class="footer_p">Copyright© 2017-2018 CoolCoder All Rights Reserved.</p>
 </footer>
 </body>
 <script>

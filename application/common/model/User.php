@@ -46,6 +46,14 @@ class User extends Model
         return isset($userId);
     }
 
+    static public function getInfo()
+    {
+        if (self::isLogin()) {
+            return self::get(session('userId'));
+        }
+        return null;
+    }
+
     public function checkPassword($password)
     {
         if ($this->getData('password') === $this::encryptPassword($password)) {

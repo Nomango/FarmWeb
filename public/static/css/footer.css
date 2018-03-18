@@ -2,7 +2,7 @@
 .footer{
     width: 100%;
     height: 220px;
-    background-color: #9ccc65;
+    background-color: #424242;
     margin-top: 20px;
 }
 .footer_p{
@@ -11,20 +11,25 @@
     text-align: center;
     margin-bottom: 0;
 }
-.footer_box{
+.footer_container{
     width: 430px;
-    height: 100px;
     margin: auto;
 }
-.footer_box_left{
+.footer_box{
     height: 100%;
     width: 150px;
     margin-top: 10px;
     display: inline-block;
 }
-.footer_box_rectangle{
-    width: 100%;
-    height: 10px;
-    background-color: #EEEEEE;
-    margin-bottom: 10px;
+.footer_box_title {
+    text-align: center;
+    color: #EEEEEE;
+    font-size: 16px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+.footer_box_p{
+    text-align: center;
+    color: #EEEEEE;
+    margin-bottom: 5px;
 }
