@@ -11,6 +11,7 @@
         /**banner**/
         .banner {
             position: relative;
+            width: 100%;
             height: 500px;
             overflow: hidden;
             margin-top: -1px;
@@ -26,9 +27,6 @@
             float: left;
             width: 100%;
             height: 500px;
-        }
-        .banner_img:hover{
-            cursor: pointer;
         }
         /**按钮**/
         #banner_buttons {
@@ -453,8 +451,8 @@
     /**轮播图**/
     window.onload = function() {
         var screenWidth = document.documentElement.clientWidth;
-        if(screenWidth <= 1280) {
-            screenWidth = 1280;
+        if(screenWidth <= 1024) {
+            screenWidth = 1024;
         }
         var fourWidth = 4*screenWidth;
         var left = (screenWidth-290)/2;
