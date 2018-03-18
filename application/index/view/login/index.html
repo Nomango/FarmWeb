@@ -20,6 +20,9 @@
     <button class="input-box-btn" type="submit">登陆</button>
 </div>
 <script>
+    window.onresize = function(){
+        window.location.reload()
+    };
     window.onload = function(){
         var oUser = document.getElementById('user-name');
         var oPswd = document.getElementById('user-pswd');

@@ -33,6 +33,9 @@
     <button class="input-box-btn" type="submit">注册</button>
 </div>
 <script>
+    window.onresize = function(){
+        window.location.reload()
+    };
     $(document).ready(function(){
         $('.input-box-btn').click(function () {
             if (checkAll()) {

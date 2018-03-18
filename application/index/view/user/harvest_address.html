@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+        body {
+            padding: 0;
+            margin: 0;
+            min-width: 1280px;
+            background-color: #FFFFFF;
+        }
+        header{
+            width: 100%;
+            height: 55px;
+        }
+        .header_a{
+            display: inline-block;
+            font-size: 14px;
+            background-color: #FFFFFF;
+            width: 100px;
+            height: 100%;
+            color: #000000;
+            text-decoration: none;
+            text-align: center;
+            line-height: 55px;
+            cursor: pointer;
+        }
+        .header_a_focus{
+            background-color: #9ccc65;
+            color: #FFFFFF;
+        }
+        .header_a_list{
+            z-index: 10;
+            position: absolute;
+            left: 25px;
+            background-color: #FFFFFF;
+            display: none;
+        }
+        .header_a_list_a{
+            display: block;
+            text-decoration: none;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 14px;
+            color: #000000;
+        }
+        .header_a_list_a:hover{
+            color: #FFFFFF;
+            background-color: #9ccc65;
+        }
+
+
+        .personal{
+            width: 100%;
+            height: 1000px;
+        }
+
+        .personal_nav{
+            width: 25%;
+            height: 700px;
+            margin-top: 100px;
+            display: inline-block;
+            vertical-align: top;
+            border-right: 1px solid #808080;
+        }
+        .personal_address{
+            width: 74%;
+            height: 700px;
+            display: inline-block;
+            margin-top: 100px;
+        }
+        .personal_nav_p{
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .personal_nav_p_bold{
+            font-weight: bold;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .personal_address_p{
+            font-weight: bold;
+            font-size: 16px;
+            margin-left: 20px;
+            width: 100%;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #808080;
+        }
+        .personal_address_info{
+            background-color: #BDBDBD;
+            width: 924px;
+            height: 30px;
+            margin-left: 20px;
+        }
+        .personal_address_info_p{
+            width: 150px;
+            height: 90px;
+            line-height: 30px;
+            text-align: center;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .info{
+            background-color: #FFFFFF;
+            height: 90px;
+            word-wrap:break-word;
+            word-break:break-all;
+        }
+        .box{
+            width: 500px;
+            height: 500px;
+            position: fixed;left: 50%; top: 25%;
+            margin-left: -250px;
+            border: 1px solid #000000;
+        }
+
+        .personal_content_list{
+            margin-left: 50px;
+            margin-top: 30px;
+        }
+        .list_p{
+            width: 68px;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .list_second{
+            margin-left: 10px;
+        }
+        .input{
+            width: 200px;
+            height: 30px;
+            margin-top: 5px;
+            border: 1px solid #e0e0e0;
+            text-indent: 5px;
+        }
+        .input:focus{
+            outline: none;
+        }
+        .btn{
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            background-color: #FFFFFF;
+            border: 1px solid #9ccc65;
+            color: #9ccc65;
+            cursor: pointer;
+        }
+        .btn:focus{
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div style="float: right">
+        <a href="" class="header_a header_a_focus">首页
+        </a><a href="" class="header_a">交易大厅
+    </a><a href="" class="header_a">联系我们
+    </a>{if condition="$Think.session.userId" }<div href="" class="header_a" style="width: 180px;position:relative;" id="header_a_">
+        <p style="display: inline-block;font-size: 14px;color: #9e9e9e">昵称</p>
+        <img src="__STATIC__/image/down.png" style="display: inline-block;width: 14px;vertical-align: middle">
+        <div class="header_a_list" id="header_a_list">
+            <a href="" class="header_a_list_a">个人资料</a>
+            <a href="" class="header_a_list_a">我的订单</a>
+            <a href="" class="header_a_list_a">分类一组</a>
+            <a href="" class="header_a_list_a">分类一组</a>
+            <a href="" class="header_a_list_a">退出</a>
+        </div>
+    </div>
+        {else/}
+        <a href="{:url('Login/index')}" class="header_a">登录</a><a href="{:url('Register/index')}" class="header_a">注册</a>
+        {/if}
+    </div>
+</header>
+<section class="personal">
+    <div class="personal_nav">
+        <p class="personal_nav_p_bold">账号管理</p>
+        <P class="personal_nav_p">安全设置</P>
+        <P class="personal_nav_p">个人资料</P>
+        <P class="personal_nav_p">密码修改</P>
+        <P class="personal_nav_p">个人交易信息</P>
+        <P class="personal_nav_p" style="color: #9ccc65">收货地址</P>
+    </div>
+    <div class="personal_address">
+        <p class="personal_address_p">收货地址</p>
+        <div class="personal_address_info">
+            <p class="personal_address_info_p">收货人</p>
+            <p class="personal_address_info_p">所在地区</p>
+            <p class="personal_address_info_p">详细地址</p>
+            <p class="personal_address_info_p">邮编</p>
+            <p class="personal_address_info_p">电话</p>
+            <p class="personal_address_info_p">操作</p>
+        </div>
+        <div class="personal_address_info info">
+            <p class="personal_address_info_p">吴皇呈</p>
+            <p class="personal_address_info_p">四川省成都市双流区西航港大道</p>
+            <p class="personal_address_info_p">四川省成都市双流区西航港大道</p>
+            <p class="personal_address_info_p">610200</p>
+            <p class="personal_address_info_p">15882418254</p>
+            <p class="personal_address_info_p" style="color: #2e6da4;cursor:pointer;">修改</p>
+        </div>
+    </div>
+</section>
+<div class="box">
+    <div class="personal_content_list">
+        <p class="list_p">收货人:</p>
+        <input class="list_second input">
+    </div>
+    <div class="personal_content_list">
+        <p class="list_p">所在地区:</p>
+        <input class="list_second input">
+    </div>
+    <div class="personal_content_list">
+        <p class="list_p">详细地址:</p>
+        <input class="list_second input">
+    </div>
+    <div class="personal_content_list">
+        <p class="list_p">邮编:</p>
+        <input class="list_second input">
+    </div>
+    <div class="personal_content_list">
+        <p class="list_p">电话:</p>
+        <input class="list_second input">
+    </div>
+    <div class="personal_content_list">
+        <button class="btn">取消</button>
+        <button class="btn" style="margin-left: 79px">确定</button>
+    </div>
+
+</div>
+</body>
+<script>
+    window.onresize = function(){
+        window.location.reload()
+    };
+    var box_width = $("#personal_content_box").width();
+    var line_width = box_width - 151;
+    $("#line_3").width(line_width);
+</script>
+</html>
