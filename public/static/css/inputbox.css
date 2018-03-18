@@ -1,0 +1,67 @@
+body {
+    background-color: #eeeeee;
+}
+.input-box {
+    width: 366px;
+    height: 372px;
+    margin: 60px auto 100px;
+    border: 1px solid #8bc34a;
+    background-color: #fff;
+}
+.input-box-title {
+    position: relative;
+    margin: 52px 40px 33px;
+}
+.input-box-title span {
+    font-size: 18px;
+    color: #353535;
+}
+.input-box-title:not(.no-before):before {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 18px;
+    background-color: #8bc34a;
+    left: -15px;
+    top: 6px;
+}
+.input-box-text {
+    display: block;
+    text-indent: 10px;
+    margin: 0 auto 26px;
+    width: 320px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid #bdbdbd;
+}
+.input-box-text:focus {
+    border: 1px solid #8bc34a;
+    outline: none;
+}
+.input-box-select {
+    display: block;
+    width: 320px;
+    height: 38px;
+    margin: 0 auto 26px;
+    text-indent: 10px;
+    border: 1px solid #bdbdbd;
+}
+.input-box-select:focus {
+    border: 1px solid #8bc34a;
+    outline: none;
+}
+.input-box-btn {
+    display: block;
+    width: 320px;
+    height: 42px;
+    background-color: #8bc34a;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+.input-box-checkbox {
+    color:#353535;
+    margin-left:20px;
+}
