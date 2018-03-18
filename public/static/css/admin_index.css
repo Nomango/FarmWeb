@@ -21,6 +21,7 @@ body{
     vertical-align: top;
 }
 .content{
+    margin-top: 1px;
     float: right;
     width: 884px;
     height: 100%;
@@ -50,7 +51,7 @@ body{
 }
 .card_title{
     width: 100%;
-    height: 88px;
+    height: 188px;
 }
 .card_title_img{
     width: 70px;
@@ -70,10 +71,10 @@ body{
 .card_title_p1{
     margin-bottom: 0px;
     font-size: 14px;
-    line-height: 88px;
+    line-height: 70px;
     display: inline-block;
     vertical-align: top;
-    color: #808080;
+    color: #ffffff;
 }
 .card_nav{
     width: 90%;
@@ -132,21 +133,22 @@ body{
 }
 
 .commodity_list{
-    width: 70%;
+    display: inline-block;
     height: 60px;
-    margin-left: 15%;
+    margin-left: 5%;
+    width: 186.11px;
+    vertical-align: top;
+    margin-top: 20px;
 }
 .commodity_list_p{
-    font-size: 18px;
+    font-size: 14px;
     display: inline-block;
     color: #000000;
 }
-
-
 .commodity_list_input{
     display: inline-block;
-    width: 100px;
-    height: 38px;
+    width: 120px;
+    height: 25px;
     margin-top: 20px;
     border: 1px solid #BDBDBD;
     text-indent: 10px;
@@ -156,10 +158,11 @@ body{
     outline: none;
 }
 .commodity_add{
+    margin-bottom: 14px;
+    vertical-align: bottom;
     width: 100px;
-    height: 40px;
-    margin-top: 50px;
-    margin-left: 133px;
+    height: 27px;
+    margin-left: 5%;
     cursor: pointer;
     border: 1px solid #2ca02c;
     background-color: #FFFFFF;
@@ -172,4 +175,32 @@ body{
     display: block;
     width: 150px;
     margin: auto;
+}
+.pagination>li{
+    background-color: #2ca02c;
+    color: #2ca02c;
+}
+.out_btn{
+    display: block;
+    font-size: 18px;
+    width: 156px;
+    height: 50px;
+    text-align: center;
+    margin-top: 289px;
+    border-radius: 0;
+    line-height: 40px;
+    background-color: #FFFFFF;
+    border: 1px solid #0ea432;
+    color: #0ea432;
+}
+.out_btn:hover{
+    color: red;
+    background-color: #ffffff;
+    border: 1px solid red;
+}
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+    background-color:#2ca02c ;
+}
+.pagination>li>a, .pagination>li>span{
+    color: #2ca02c;
 }

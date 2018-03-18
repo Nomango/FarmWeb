@@ -5,20 +5,78 @@
     <title>用户后台管理</title>
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="__STATIC__/css/admin_index.css">
+    <style>
+        .choose_img>img{
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+        }
+        .file {
+            text-align: center;
+            width: 64px;
+            position: relative;
+            margin-top: 19px;
+            display: inline-block;
+            vertical-align: top;
+            overflow: hidden;
+            text-decoration: none;
+            cursor: pointer;
+            color: #000000;
+            text-indent: 0;
+        }
+        .file input {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+        }
+    </style>
 </head>
 <body>
 <div class="admin_box">
     <div class="nav">
+        <div style=";width: 100%;border-bottom: 1px solid #FFFFFF;">
+            <p class="card_title_p1"style="margin-left: 36.765px">欢迎您: </p><span class="card_title_p1"> locust</span>
+        </div>
         <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'index\')}'">订单管理</button>
-        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'usermanage\')}'">用户管理</button>
-        <button class="nav_btn nav_btn_focus">商品管理</button>
+        <button class="nav_btn " onclick="javascrtpt:window.location.href='{:url(\'usermanage\')}'">用户管理</button>
+        <button class="nav_btn nav_btn_focus" onclick="javascrtpt:window.location.href='{:url(\'goodsmanage\')}'">商品管理</button>
+        <a  href="{:url('AdminLogin/logOut')}" class="out_btn btn btn-primary" style="width: 154px;margin-top: 287px;line-height: 50px;text-decoration: none">注销</a>
     </div>
     <div class="content">
     <div class="card" style="display: block">
         <div style="display: block;width: 100%;height: 100%" id="commodity_list">
             <div style="width: 100%;height: 90%">
                 <div class="card_title">
-                    <p class="card_title_p" style="margin-left: 5%">商品管理</p>
+                    <div class="commodity_list">
+                        <a href="javascript:;" class="file" style="cursor: pointer">选择文件
+                            <input type="file" name="" id="file_input" style="cursor: pointer">
+                        </a>
+
+                        <div style="display: inline-block;width: 60px;height: 60px" class="commodity_list_p choose_img" id="image"></div>
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品名称:</p>
+                        <input type="text" class="commodity_list_input">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品编码:</p>
+                        <input type="text" class="commodity_list_input">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品价格:</p>
+                        <input type="text" class="commodity_list_input">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品数量:</p>
+                        <input type="text" class="commodity_list_input">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品分类:</p>
+                        <input type="text" class="commodity_list_input">
+                    </div>
+                    <button class="commodity_add" id="commodity_add">上架</button>
                 </div>
                 <div class="card_nav">
                     <p class="card_nav_p ">产品</p>
@@ -46,42 +104,38 @@
                 {/volist}
             </div>
             <div style="width: 100%;height: 10%;">
-                <button class="page_btn" style="float: left;margin-left: 5%" id="add_commodity">上架</button>
                 <button class="page_btn">下页</button>
                 <button class="page_btn">上页</button>
             </div>
-        </div>
-        <div style="display: none" id="commodidy">
-            <div class="commodity_list">
-                <p class="commodity_list_p">产品名称:</p>
-                <input type="text" class="commodity_list_input">
-            </div>
-            <div class="commodity_list">
-                <p class="commodity_list_p">产品价格:</p>
-                <input type="text" class="commodity_list_input">
-            </div>
-            <div class="commodity_list">
-                <p class="commodity_list_p">产品数量:</p>
-                <input type="text" class="commodity_list_input">
-            </div>
-            <div class="commodity_list">
-                <p class="commodity_list_p">产品分类:</p>
-                <input type="text" class="commodity_list_input">
-            </div>
-            <button class="commodity_add" id="commodity_add">确定添加</button>
         </div>
     </div>
 </div>
 </div>
 <script>
-    $("#add_commodity").click(function () {
-        $("#commodity_list").css('display','none');
-        $("#commodidy").css('display','block');
-    });
-    $("#commodity_add").click(function () {
-        $("#commodidy").css('display','none');
-        $("#commodity_list").css('display','block');
-    });
+    var result = document.getElementById("image");
+    var input = document.getElementById("file_input");
+
+    if(typeof FileReader === 'undefined'){
+        result.innerHTML = "抱歉，你的浏览器不支持 FileReader";
+        input.setAttribute('disabled','disabled');
+    }else{
+        input.addEventListener('change',readFile,false);
+    }
+
+    function readFile(){
+        var file = this.files[0];
+        if(!/image\/\w+/.test(file.type)){
+            alert("请确保文件为图像类型");
+            return false;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function(e){
+            //alert(3333)
+            //alert(this.result);
+            result.innerHTML = '<img src="'+this.result+'" alt=""/>'
+        }
+    }
 </script>
 </body>
 </html>
