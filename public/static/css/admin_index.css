@@ -68,6 +68,7 @@ body{
     margin-left: 10px;
 }
 .card_title_p1{
+    margin-bottom: 0px;
     font-size: 14px;
     line-height: 88px;
     display: inline-block;
@@ -98,10 +99,6 @@ body{
 }
 .card_content:hover{
     background-color: rgba(139, 195, 74, 0.2);
-}
-.card_operation{
-    margin-left: 30px;
-    width: 13%;
 }
 .user_operation{
     cursor: pointer;
@@ -170,4 +167,9 @@ body{
 }
 .commodity_add:focus{
     outline:none;
+}
+.pagination{
+    display: block;
+    width: 150px;
+    margin: auto;
 }
