@@ -18,7 +18,7 @@ use think\Request;
 
 class AdminController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
         // 调用父类构造函数(必须)
         parent::__construct();
@@ -27,7 +27,7 @@ class AdminController extends Controller
         if (!Admin::isLogin()) {
             return $this->error('请先登陆', url('AdminLogin/index'));
         }
-    }*/
+    }
 
     public function index()
     {
@@ -36,7 +36,7 @@ class AdminController extends Controller
         $Order = new Order;
         $orders = $Order->with(['user','goods'])->paginate($pageSize);
         $this->assign('orders', $orders);
-        return $this->fetch('admin/index');
+        return $this->fetch('');
     }
 
     public function usermanage()
