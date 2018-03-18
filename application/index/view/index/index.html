@@ -6,83 +6,29 @@
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet" href="__STATIC__/css/header.css">
     <link rel="stylesheet" href="__STATIC__/css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
     <script src="__STATIC__/js/common.js"></script>
     <style>
-        /**banner**/
-        .banner {
-            position: relative;
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            margin-top: -1px;
-        }
-        /**将图片设置成一个列表**/
-        #list {
-            position: absolute;
-            z-index: 1;
+        .swiper-container {
+            width: auto;
             height: 500px;
         }
-        /**单个图片**/
-        .banner_img {
-            float: left;
-            width: 100%;
-            height: 500px;
+        .swiper-container .banner-image {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
         }
-        /**按钮**/
-        #banner_buttons {
-            position: absolute;
-            bottom: 20px;
-            z-index: 2;
-        }
-        /**下方的按钮**/
-        #banner_buttons span {
-            float: left;
+        .swiper-container .swiper-button {
+            transition: all .4s ease;
+            margin-left: 15px;
             margin-right: 15px;
-            width: 46px;
-            height: 7px;
-            border: 1px solid #fff;
-            background: #fff;
-            cursor: pointer;
-            border-radius: 3px;
+            padding: 30px 10px;
+            border-radius: 6px;
         }
-        #banner_buttons .on {
-            background: orangered;
-            border: 1px solid orangered;
+        .swiper-container .swiper-button:hover {
+            background-size: 20px 30px;
         }
-        /**两侧的按钮**/
-        .arrow {
-            position: absolute;
-            top: 104px;
-            z-index: 2;
-            display: none;
-            width: 62px;
-            height: 192px;
-            font-size: 36px;
-            font-weight: bold;
-            line-height: 39px;
-            text-align: center;
-            color: #fff;
-            background-color: RGBA(0, 0, 0, .3);
-            cursor: pointer;
-            border-radius: 1px;
-        }
-        .arrow:hover {
-            background-color: RGBA(0, 0, 0, .7);
-        }
-        /**hover后两侧的按钮**/
-        .banner:hover .arrow {
-            display: block;
-        }
-        .arrow>img{
-            margin-top: 72px;
-        }
-        #prev{
-            left: 20px;
-        }
-        #next{
-            right: 20px;
-        }
-
         .nav{
             width: 100%;
             height: 75px;
@@ -102,6 +48,7 @@
             text-align: center;
             line-height: 75px;
             color: #000000;
+            cursor: pointer;
         }
         .nav_a_focus{
             background-color: #eeeeee;
@@ -163,27 +110,19 @@
 </header>
 
 
-<section class="banner" id="banner">
-    <div id="list" style=" left: 0px;">
-        <img src="__STATIC__/image/1.png"  class="banner_img" />
-        <img src="__STATIC__/image/2.JPG"  class="banner_img" />
-        <img src="__STATIC__/image/3.JPG"  class="banner_img" />
-        <img src="__STATIC__/image/4.JPG"  class="banner_img" />
-        <img src="__STATIC__/image/5.JPG"  class="banner_img" />
+<section class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner1.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner2.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner3.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner4.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner5.jpg')"></div>
     </div>
-    <div id="banner_buttons">
-        <span index="1" class="on"></span>
-        <span index="2"></span>
-        <span index="3"></span>
-        <span index="4"></span>
-        <span index="5"></span>
-    </div>
-    <div id="prev" class="arrow">
-        <img src="__STATIC__/image/prev.png">
-    </div>
-    <div id="next" class="arrow">
-        <img src="__STATIC__/image/next.png">
-    </div>
+    <!-- 分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 导航按钮 -->
+    <div class="swiper-button swiper-button-prev swiper-button-white"></div>
+    <div class="swiper-button swiper-button-next swiper-button-white"></div>
 </section>
 <section class="nav">
     <div class="nav_box">
@@ -419,11 +358,31 @@
             <div class="footer_box_rectangle"></div>
         </div>
     </div>
-    <p class="footer_p">Copyright© 1997-2018 CoolCoder All Rights Resened()</p>
+    <p class="footer_p">Copyright© 1997-2018 CoolCoder All Rights Reserved()</p>
 </footer>
 </body>
 <script>
-
+    // 轮播图脚本
+    new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        // 自动循环
+        autoplay: {
+            delay: 3000
+        },
+        // 分页器
+        pagination: {
+            el: '.swiper-pagination',
+            clickable :true
+        },
+        // 前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+</script>
+<script>
     var change = function (id) {
         if(id==1){
             $("#a1").addClass("nav_a_focus");
@@ -444,98 +403,5 @@
             $("#content_3").css('display','block');
         }
     };
-    window.onresize = function(){
-        window.location.reload()
-    };
-
-    /**轮播图**/
-    window.onload = function() {
-        var screenWidth = document.documentElement.clientWidth;
-        if(screenWidth <= 1024) {
-            screenWidth = 1024;
-        }
-        var fourWidth = 4*screenWidth;
-        var left = (screenWidth-290)/2;
-        $("#banner").width(screenWidth);
-        $("#list>img").width(screenWidth);
-        $("#list").width(fourWidth);
-        $("#banner_buttons").css("left",left+"px");
-        var list = document.getElementById('list');
-        var prev = document.getElementById('prev');
-        var next = document.getElementById('next');
-        function animate(offset) {
-            var newLeft = parseInt(list.style.left) + offset;
-            list.style.left = newLeft + 'px';
-            if(newLeft<-fourWidth){
-                list.style.left = 0 + 'px';
-            }
-            if(newLeft>0){
-                list.style.left = -fourWidth + 'px';
-            }
-        }
-        prev.onclick = function() {
-            animate(screenWidth);
-        };
-        next.onclick = function() {
-            animate(-screenWidth);
-        };
-        function next() {
-            animate(-screenWidth)
-        }
-        var timer;
-        function play() {
-            timer = setInterval(function () {
-                next.onclick();
-            }, 3000)
-        }
-        play();
-        var container = document.getElementById('banner');
-        function stop() {
-            clearInterval(timer);
-        }
-        container.onmouseover = stop;
-        container.onmouseout = play;
-        var buttons = document.getElementById('banner_buttons').getElementsByTagName('span');
-        var index = 1;
-        function buttonsShow() {
-            //这里需要清除之前的样式
-            for (var i = 0; i < buttons.length; i++) {
-                if (buttons[i].className == 'on') {
-                    buttons[i].className = '';
-                }
-            }
-            //数组从0开始，故index需要-1
-            buttons[index - 1].className = 'on';
-        }
-        prev.onclick = function() {
-            index -= 1;
-            if (index < 1) {
-                index = 5;
-            }
-            buttonsShow();
-            animate(screenWidth);
-        };
-        next.onclick = function() {
-            //由于上边定时器的作用，index会一直递增下去，我们只有5个小圆点，所以需要做出判断
-            index += 1;
-            if (index > 5) {
-                index = 1;
-            }
-            buttonsShow();
-            animate(-screenWidth);
-        };
-        for (var i = 0; i < buttons.length; i++) {
-            // 这里使用的是立即执行函数，
-            (function(i) {
-                buttons[i].onclick = function() {
-                    var clickIndex = parseInt(this.getAttribute('index'));
-                    var offset = screenWidth * (index - clickIndex);
-                    animate(offset);
-                    index = clickIndex;
-                    buttonsShow();
-                }
-            })(i)
-        }
-    }
 </script>
 </html>
