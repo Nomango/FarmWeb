@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>用户后台管理</title>
-    <link rel="stylesheet" href="__STATIC__/lib/bootstrap/css/bootstrap.min.css">
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/lib/layer/layer.js"></script>
+    <link rel="stylesheet" href="__STATIC__/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="__STATIC__/css/admin_index.css">
 </head>
 <body>
@@ -33,14 +34,13 @@
                 <p class="card_nav_p">操作</p>
             </div>
             {volist name="users" id="user"}
-            <div class="card_content">
+            <div id="user-{$user.id}" class="card_content">
                 <p class="card_nav_p ">{$user.username}</p>
                 <p class="card_nav_p">{$user.nickname}</p>
                 <p class="card_nav_p">{eq name='$user.sex' value='0'}男{else /}女{/eq}</p>
                 <p class="card_nav_p">{$user.email}</p>
                 <p class="card_nav_p">{$user.phone}</p>
                 <div class="card_nav_p card_operation">
-                    <span class="user_operation" href="javascript:void(0)" onclick="user_detail()">详情</span>
                     <span class="user_operation" href="javascript:void(0)" onclick="user_delete('{$user.id}')">删除</span>
                 </div>
             </div>
@@ -54,18 +54,27 @@
 </div>
 </div>
 <script>
-    function user_detail() {}
     function user_delete(id) {
-        if (confirm('是否确认删除？')) {
+        // 询问框
+        layer.confirm('确认要删除该用户吗？', {
+            btn: ['删除','取消']
+        }, function() {
+            var msgIndex = layer.msg('正在删除...', {time:-1, shade: 0.3});
             $.ajax({
                 data: { id: id },
                 url:'{:url("deleteUser")}',
                 success: function (data) {
-                    alert(data['msg']);
-                    window.location.reload();
+                    layer.close(msgIndex);
+                    if (data['result']) {
+                        layer.msg('删除成功', {icon: 1});
+                        $('#user-' + id).remove();
+                    }
+                    else {
+                        layer.msg(data['msg'], {icon: 2});
+                    }
                 }
-            })
-        }
+            });
+        });
     }
 </script>
 </body>

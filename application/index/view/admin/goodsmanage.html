@@ -31,7 +31,7 @@
                 {volist name="goods" id="g"}
                 <div class="card_content">
                     <div class="card_nav_p">
-                        <img src="{$g.image.url}" class="commodity_img">
+                        <img src="{$g.image}" class="commodity_img">
                         <div class="commodity_desc">
                             <p class="commodity_p">{$g.name}</p>
                             <p class="commodity_p">{$g.number}</p>
@@ -77,11 +77,11 @@
     $("#add_commodity").click(function () {
         $("#commodity_list").css('display','none');
         $("#commodidy").css('display','block');
-    })
+    });
     $("#commodity_add").click(function () {
         $("#commodidy").css('display','none');
         $("#commodity_list").css('display','block');
-    })
+    });
 </script>
 </body>
 </html>

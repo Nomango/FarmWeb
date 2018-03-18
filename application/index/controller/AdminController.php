@@ -44,7 +44,7 @@ class AdminController extends Controller
         $pageSize = 5; // 每页显示5条数据
 
         $User = new User;
-        $users = $User->paginate($pageSize);
+        $users = $User->where('delete', '=', 0)->paginate($pageSize);
         $this->assign('users', $users);
         return $this->fetch();
     }
@@ -54,7 +54,7 @@ class AdminController extends Controller
         $pageSize = 5; // 每页显示5条数据
 
         $Goods = new Goods;
-        $goods = $Goods->with(['category','image'])->paginate($pageSize);
+        $goods = $Goods->with(['category'])->paginate($pageSize);
         $this->assign('goods', $goods);
         return $this->fetch();
     }
@@ -70,10 +70,11 @@ class AdminController extends Controller
         $user = User::get($id);
 
         if (!is_null($user)) {
-            if ($user->delete()) {
-                return json(['result' => true, 'msg' => '删除成功！']);
+            $user['delete'] = 1;
+            if ($user->validate(true)->save()) {
+                return json(['result' => true]);
             }
         }
-        return json(['result' => false, 'msg' => '删除失败！']);
+        return json(['result' => false, 'msg' => '删除失败！找不到该用户或保存时出现错误']);
     }
 }

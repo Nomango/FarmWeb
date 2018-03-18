@@ -17,9 +17,4 @@ class Goods extends Model
     {
         return $this->belongsTo('category', 'category_id', 'id');
     }
-
-    public function image()
-    {
-        return $this->hasOne('image', 'id', 'image_id');
-    }
 }
