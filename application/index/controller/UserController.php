@@ -9,7 +9,17 @@
 namespace app\index\controller;
 
 
-class UserController
-{
+use think\Controller;
 
+class UserController extends Controller
+{
+    public function index()
+    {
+        return $this->fetch();
+    }
+
+    public function address()
+    {
+        return $this->fetch();
+    }
 }

@@ -4,92 +4,15 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <script src="__STATIC__/lib/layer/layer.js"></script>
+    <link rel="stylesheet" href="__STATIC__/css/header.css">
+    <link rel="stylesheet" href="__STATIC__/css/user_info.css">
     <style>
-        *{
-            padding: 0;
-            margin: 0;
-            font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-        body {
-            padding: 0;
-            margin: 0;
-            min-width: 1280px;
-            background-color: #FFFFFF;
-        }
-        header{
-            width: 100%;
-            height: 55px;
-        }
-        .header_a{
-            display: inline-block;
-            font-size: 14px;
-            background-color: #FFFFFF;
-            width: 100px;
-            height: 100%;
-            color: #000000;
-            text-decoration: none;
-            text-align: center;
-            line-height: 55px;
-            cursor: pointer;
-        }
-        .header_a_focus{
-            background-color: #9ccc65;
-            color: #FFFFFF;
-        }
-        .header_a_list{
-            z-index: 10;
-            position: absolute;
-            left: 25px;
-            background-color: #FFFFFF;
-            display: none;
-        }
-        .header_a_list_a{
-            display: block;
-            text-decoration: none;
-            width: 120px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            font-size: 14px;
-            color: #000000;
-        }
-        .header_a_list_a:hover{
-            color: #FFFFFF;
-            background-color: #9ccc65;
-        }
-
-
-        .personal{
-            width: 100%;
-            height: 1000px;
-        }
-
-        .personal_nav{
-            width: 25%;
-            height: 700px;
-            margin-top: 100px;
-            display: inline-block;
-            vertical-align: top;
-            border-right: 1px solid #808080;
-        }
         .personal_content{
             width: 74%;
             height: 700px;
             display: inline-block;
             margin-top: 100px;
-        }
-        .personal_nav_p{
-            font-size: 16px;
-            margin-bottom: 10px;
-            text-align: center;
-            cursor: pointer;
-        }
-        .personal_nav_p_bold{
-            font-weight: bold;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 16px;
         }
         .personal_content_p{
             font-size: 16px;
@@ -182,10 +105,10 @@
 <section class="personal">
     <div class="personal_nav">
         <p class="personal_nav_p_bold">账号管理</p>
-        <P class="personal_nav_p" style="color: #9ccc65">个人资料</P>
-        <P class="personal_nav_p">密码修改</P>
-        <P class="personal_nav_p">个人交易信息</P>
-        <P class="personal_nav_p">收货地址</P>
+        <a class="personal_nav_p" style="color: #9ccc65">个人资料</a>
+        <a class="personal_nav_p">密码修改</a>
+        <a class="personal_nav_p">个人交易信息</a>
+        <a href="{:url('User/address')}" class="personal_nav_p">收货地址</a>
     </div>
 
     <div class="personal_content" >

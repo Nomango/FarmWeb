@@ -4,60 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="__STATIC__/css/header.css">
+    <link rel="stylesheet" href="__STATIC__/css/footer.css">
+    <script src="__STATIC__/js/common.js"></script>
     <style>
-        *{
-            padding: 0;
-            margin: 0;
-            font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
-        body {
-            padding: 0;
-            margin: 0;
-            min-width: 1280px;
-            background-color: #eeeeee;
-        }
-        header{
-            width: 100%;
-            height: 55px;
-        }
-        .header_a{
-            display: inline-block;
-            font-size: 14px;
-            background-color: #FFFFFF;
-            width: 100px;
-            height: 100%;
-            color: #000000;
-            text-decoration: none;
-            text-align: center;
-            line-height: 55px;
-            cursor: pointer;
-        }
-        .header_a_focus{
-            background-color: #9ccc65;
-            color: #FFFFFF;
-        }
-        .header_a_list{
-            z-index: 10;
-            position: absolute;
-            left: 25px;
-            background-color: #FFFFFF;
-            display: none;
-        }
-        .header_a_list_a{
-            display: block;
-            text-decoration: none;
-            width: 120px;
-            height: 40px;
-            line-height: 40px;
-            text-align: center;
-            font-size: 14px;
-            color: #000000;
-        }
-        .header_a_list_a:hover{
-            color: #FFFFFF;
-            background-color: #9ccc65;
-        }
-
         /**banner**/
         .banner {
             position: relative;
@@ -189,38 +139,6 @@
             line-height: 25px;
             text-align: center;
         }
-
-
-        /**footer**/
-        .footer{
-            width: 100%;
-            height: 220px;
-            background-color: #9ccc65;
-            margin-top: 20px;
-        }
-        .footer_p{
-            color: #EEEEEE;
-            padding-top: 20px;
-            text-align: center;
-            margin-bottom: 0;
-        }
-        .footer_box{
-            width: 430px;
-            height: 100px;
-            margin: auto;
-        }
-        .footer_box_left{
-            height: 100%;
-            width: 150px;
-            margin-top: 10px;
-            display: inline-block;
-        }
-        .footer_box_rectangle{
-            width: 100%;
-            height: 10px;
-            background-color: #EEEEEE;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -233,7 +151,7 @@
         <p style="display: inline-block;font-size: 14px;color: #9e9e9e">昵称</p>
         <img src="__STATIC__/image/down.png" style="display: inline-block;width: 14px;vertical-align: middle">
         <div class="header_a_list" id="header_a_list">
-            <a href="" class="header_a_list_a">个人资料</a>
+            <a href="{:url('User/index')}" class="header_a_list_a">个人资料</a>
             <a href="" class="header_a_list_a">我的订单</a>
             <a href="" class="header_a_list_a">分类一组</a>
             <a href="" class="header_a_list_a">分类一组</a>
@@ -434,16 +352,6 @@
     window.onresize = function(){
         window.location.reload()
     };
-    $("#header_a_").hover(function () {
-        $("#header_a_list").css('display','block');
-        // $("#xiala_img").attr('src',"__STATIC__/image/xialalv.png");
-    });
-    $("#header_a_").mouseleave(function () {
-        $("#header_a_list").css('display','none');
-        // $("#xiala_img").attr('src',"__STATIC__/image/xiala.png");
-    });
-
-
 
     /**轮播图**/
     window.onload = function() {
