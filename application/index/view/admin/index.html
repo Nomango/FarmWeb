@@ -9,13 +9,13 @@
 <body>
 <div class="admin_box">
     <div class="nav">
-        <div style=";width: 100%;border-bottom: 1px solid #FFFFFF;">
+        <div style=";width: 100%;">
             <p class="card_title_p1"style="margin-left: 36.765px">欢迎您: </p><span class="card_title_p1"> locust</span>
+            <a  href="{:url('AdminLogin/logOut')}" class="logout_btn">注销</a>
         </div>
         <button class="nav_btn nav_btn_focus" onclick="javascrtpt:window.location.href='{:url(\'index\')}'">订单管理</button>
         <button class="nav_btn " onclick="javascrtpt:window.location.href='{:url(\'usermanage\')}'">用户管理</button>
-        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'goodsmanage\')}'">商品管理</button>
-        <a  href="{:url('AdminLogin/logOut')}" class="out_btn btn btn-primary" style="width: 154px;margin-top: 287px;text-decoration: none;line-height: 50px">注销</a>
+        <button class="nav_btn " onclick="javascrtpt:window.location.href='{:url(\'goodsmanage\')}'">商品管理</button>
     </div>
     <div class="content">
         <div class="card" style="display: block">
@@ -38,15 +38,11 @@
                     <p class="card_nav_p">{$order.number}</p>
                     <p class="card_nav_p">{$order.total}</p>
                     <p class="card_nav_p">{$order.user.nickname}</p>
-                    <p class="card_nav_p">
-                        {if condition="$order.state eq 0"}
-                        未处理
-                        {elseif condition="$order.state eq 1"}
-                        正在处理
-                        {elseif condition="$order.state eq 2"}
-                        交易完成
-                        {else /}
-                        错误
+                    <p class="card_nav_p" id="order_state" >
+                        {if condition="$order.state eq 0"}发货
+                        {elseif condition="$order.state eq 1"}正在处理
+                        {elseif condition="$order.state eq 2"}交易完成
+                        {else /}错误
                         {/if}
                     </p>
                 </div>
@@ -60,6 +56,15 @@
 </div>
 </body>
 <script>
+    var value = $("#order_state").html();
+    if( $.trim(value) == "发货"){
+        $("#order_state").css("cursor","pointer");
+        $("#order_state").css("color","#2ca02c");
+        $("#order_state").click(function () {
+            alert("ss")
+        })
+    }
+
     window.onresize = function(){
         window.location.reload()
     };

@@ -49,10 +49,6 @@ body{
     height: 100%;
     background-color: #FFFFFF;
 }
-.card_title{
-    width: 100%;
-    height: 188px;
-}
 .card_title_img{
     width: 70px;
     height: 70px;
@@ -203,4 +199,13 @@ body{
 }
 .pagination>li>a, .pagination>li>span{
     color: #2ca02c;
+}
+.logout_btn{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    color: #FFFFFF;
 }
