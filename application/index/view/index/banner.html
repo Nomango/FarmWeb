@@ -1,0 +1,198 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
+<style>
+    .swiper-container {
+        width: auto;
+        height: 500px;
+    }
+    .swiper-container .banner-image {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    .swiper-container .swiper-button {
+        transition: all .4s ease;
+        margin-left: 15px;
+        margin-right: 15px;
+        padding: 30px 10px;
+        border-radius: 6px;
+    }
+    .swiper-container .swiper-button:hover {
+        background-size: 20px 30px;
+    }
+    .swiper-container-nav {
+        width: 850px;
+        overflow: hidden;
+        margin: 0 auto 120px;
+        padding-top: 60px;
+    }
+    .swiper-button-prev {
+        background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%238BC34A'%2F%3E%3C%2Fsvg%3E");
+    }
+    .swiper-button-next{
+        background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%238BC34A'%2F%3E%3C%2Fsvg%3E");
+    }
+    .swiper-pagination-bullet-active {
+        background: #8BC34A;
+    }
+    .nav{
+        width: 100%;
+        height: 80px;
+        background-color: #FFFFFF;
+    }
+    .nav_box{
+        width: 850px;
+        height: 100%;
+        margin: auto;
+    }
+    .nav_a{
+        width: 283px;
+        height: 100%;
+        line-height: 80px;
+        display: inline-block;
+        text-decoration: none;
+        font-size: 18px;
+        text-align: center;
+        color: #000000;
+        cursor: pointer;
+    }
+    .nav_a:hover{
+        background-color: #eeeeee;
+    }
+    .nav_a_focus{
+        background-color: #dedede;
+        cursor: auto;
+    }
+    .nav_a_focus:hover{
+        background-color: #dddddd;
+    }
+    .content{
+        width: 100%;
+        height: 690px;
+    }
+    .content_box{
+        width: 960px;
+        height: 100%;
+        margin: auto;
+    }
+    .content_card{
+        display: inline-block;
+        width: 234px;
+        height: 240px;
+        margin-top: 10px;
+        transition: box-shadow .3s;
+        text-decoration: none;
+    }
+    .content_card:hover{
+        box-shadow: 0 0 15px #808080;
+    }
+    .content_img_box {
+        width: 100%;
+        height: 160px;
+        overflow: hidden;
+    }
+    .content_img{
+        width: 100%;
+        height: 160px;
+        background-color: #FFF;
+        transition: transform .3s;
+    }
+    .content_card:hover .content_img{
+        transform: scale(1.2);
+    }
+    .content_info{
+        width: auto;
+        height: 80px;
+        background-color: #FFFFFF;
+    }
+    .content_info_p{
+        color: #353535;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        padding: 10px 0 5px;
+    }
+</style>
+
+<section class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner1.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner2.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner3.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner4.jpg')"></div>
+        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner5.jpg')"></div>
+    </div>
+    <!-- 分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 导航按钮 -->
+    <div class="swiper-button swiper-button-prev swiper-button-gary"></div>
+    <div class="swiper-button swiper-button-next swiper-button-gary"></div>
+</section>
+<section class="nav">
+    <div class="nav_box">
+        <div class="swiper-pagination-nav"></div>
+    </div>
+</section>
+<section class="swiper-container-nav">
+    <div class="swiper-wrapper" >
+        {volist name="goods" id="g"}
+        <a class="swiper-slide content_card" href="#">
+            <div class="content_img_box">
+                <img src="__STATIC__/{$g.image}" class="content_img">
+            </div>
+            <div class="content_info">
+                <p class="content_info_p">{$g.name}</p>
+                <p class="content_info_p" style="color: #808080">{$g.price}</p>
+            </div>
+        </a>
+        {/volist}
+    </div>
+</section>
+
+
+<script>
+    // 轮播图脚本
+    new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        // 自动循环
+        autoplay: {
+            delay: 3000
+        },
+        // 分页器
+        pagination: {
+            el: '.swiper-pagination',
+            clickable :true
+        },
+        // 前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+    // 导航栏
+    new Swiper ('.swiper-container-nav', {
+        direction: 'horizontal',
+        width: 850,
+        slidesPerView : 4,  // 一行四个
+        slidesPerColumn: 3, // 显示三行
+        spaceBetween : 8,   // 间隔
+        slidesPerGroup: 4,  // 4个一组
+        pagination: {
+            el: '.swiper-pagination-nav',
+            clickable: true,
+            bulletClass : 'nav_a',
+            bulletActiveClass: 'nav_a_focus',
+            renderBullet: function (index, className) {
+                if (index === 0) {
+                    return '<span class="' + className + '">旅行必备</span>';
+                } else if (index === 1) {
+                    return '<span class="' + className + '">精美手工</span>';
+                } else {
+                    return '<span class="' + className + '">吃货专区</span>';
+                }
+            }
+        },
+        uniqueNavElements: false,
+    });
+</script>

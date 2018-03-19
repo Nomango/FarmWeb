@@ -12,6 +12,7 @@ body {
 header{
     width: 100%;
     height: 55px;
+    background-color: #fff;
 }
 .header_a{
     display: inline-block;
@@ -23,11 +24,21 @@ header{
     text-decoration: none;
     text-align: center;
     line-height: 55px;
-    cursor: pointer;
 }
 .header_a_focus{
     background-color: #9ccc65;
     color: #FFFFFF;
+}
+.header_login_btn{
+    display: inline-block;
+    font-size: 14px;
+    background-color: #FFFFFF;
+    width: 60px;
+    height: 100%;
+    color: #000000;
+    text-decoration: none;
+    text-align: center;
+    line-height: 55px;
 }
 .header_a_list{
     z-index: 10;

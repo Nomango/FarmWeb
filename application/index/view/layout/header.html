@@ -1,0 +1,19 @@
+<header>
+    <div style="float: right">
+        <a href="" class="header_a header_a_focus">首页
+        </a><a href="" class="header_a">交易大厅
+    </a><a href="" class="header_a">联系我们
+    </a>{if condition="$isLogin" }<div href="" class="header_a" style="width: 180px;position:relative;" id="header_a_">
+        <p style="display: inline-block;font-size: 14px;color: #9e9e9e">{$user.nickname}</p>
+        <img src="__STATIC__/image/down.png" style="display: inline-block;width: 14px;vertical-align: middle">
+        <div class="header_a_list" id="header_a_list">
+            <a href="{:url('User/index')}" class="header_a_list_a">个人资料</a>
+            <a href="" class="header_a_list_a">我的订单</a>
+            <a href="{:url('Login/logOut')}" class="header_a_list_a">退出</a>
+        </div>
+    </div>
+        {else/}
+        <a href="{:url('Login/index')}" class="header_login_btn">登录</a><a href="{:url('Register/index')}" class="header_login_btn" style="margin-right: 30px">注册</a>
+        {/if}
+    </div>
+</header>

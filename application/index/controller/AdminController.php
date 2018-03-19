@@ -18,16 +18,16 @@ use think\Request;
 
 class AdminController extends Controller
 {
-    /*public function __construct()
+    public function __construct()
     {
         // 调用父类构造函数(必须)
         parent::__construct();
 
         // 验证用户是否登陆
         if (!Admin::isLogin()) {
-            return $this->error('请先登陆', url('AdminLogin/index'));
+            return $this->redirect(url('AdminLogin/index'));
         }
-    }*/
+    }
 
     public function index()
     {
