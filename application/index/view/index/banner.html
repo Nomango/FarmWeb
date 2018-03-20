@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
-<link rel="stylesheet" href="__STATIC__/lib/layui/css/layui.css">
 <style>
     .swiper-container {
         width: 100%;
@@ -156,7 +155,7 @@
             </div>
             <div class="content_info">
                 <p class="content_info_p">{$g.name}</p>
-                <p class="content_info_p" style="color: #808080">{$g.price}&nbsp;元</p>
+                <p class="content_info_p" style="color: #808080">{:ceil($g.price)}&nbsp;元</p>
             </div>
         </a>
         {/volist}
@@ -210,8 +209,6 @@
         uniqueNavElements: false,
     });
 </script>
-
-<script src="__STATIC__/lib/layui/layui.js"></script>
 <script>
     //一般直接写在一个js文件中
     layui.use(['flow'], function(){

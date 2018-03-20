@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>登陆</title>
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
-    <script src="__STATIC__/lib/layer/layer.js"></script>
     <link rel="stylesheet" href="__STATIC__/css/inputbox.css">
 </head>
 <body>
@@ -23,6 +22,7 @@
 {include file="layout/footer" /}
 <script>
     window.onload = function(){
+        layui.use('layer');
         var oUser = document.getElementById('user-name');
         var oPswd = document.getElementById('user-pswd');
         var oRemember = document.getElementById('remember-pswd');
@@ -52,7 +52,7 @@
                     UserLogin(data['result'], oRemember.checked, oUser.value, oPswd.value);
                 },
                 error: function () {
-                    layer.alert('服务器飘去远方了...', {icon:5});
+                    layui.layer.alert('服务器飘去远方了...', {icon:5});
                 }
             });
         });
@@ -67,7 +67,7 @@
                 setCookie('farm-user-pswd', pswd, 3); //保存密码到cookie，有效期3天
             }
         } else {
-            layer.alert('用户名或密码错误！', {icon:5});
+            layui.layer.alert('用户名或密码错误！', {icon:5});
         }
     }
     //设置cookie

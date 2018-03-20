@@ -65,14 +65,25 @@ header{
     text-align: center;
     line-height: 55px;
 }
-.header_a_list{
+.header_userinfo {
+    width: 100px;
+    position:relative;
+    margin-right: 100px;
+    cursor: pointer;
+}
+.header_username {
+    font-size: 14px;
+    color: #606060;
+    padding-left: 15px;
+    padding-right: 5px;
+}
+.header_userinfo_list{
     z-index: 10;
     position: absolute;
-    left: 25px;
     background-color: #FFFFFF;
     display: none;
 }
-.header_a_list_a{
+.header_userinfo_list_a{
     display: block;
     text-decoration: none;
     width: 120px;
@@ -82,7 +93,7 @@ header{
     font-size: 14px;
     color: #000000;
 }
-.header_a_list_a:hover{
+.header_userinfo_list_a:hover{
     color: #FFFFFF;
     background-color: #9ccc65;
 }

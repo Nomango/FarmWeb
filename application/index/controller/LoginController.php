@@ -18,8 +18,12 @@ class LoginController extends Controller
     // 用户登陆表单
     public function index()
     {
-        // 显示登陆表单
-        return $this->fetch();
+        if (User::isLogin()) {
+            $this->redirect(url('Index/index'));
+        } else {
+            // 显示登陆表单
+            return $this->fetch();
+        }
     }
 
     public function login()

@@ -17,7 +17,11 @@ class RegisterController extends Controller
 {
     public function index()
     {
-        return $this->fetch();
+        if (User::isLogin()) {
+            $this->redirect(url('Index/index'));
+        } else {
+            return $this->fetch();
+        }
     }
 
     public function register()

@@ -17,7 +17,11 @@ class AdminLoginController extends Controller
 {
     public function index()
     {
-        return $this->fetch();
+        if (Admin::isLogin()) {
+            $this->redirect(url('Admin/index'));
+        } else {
+            return $this->fetch();
+        }
     }
 
     public function login()
