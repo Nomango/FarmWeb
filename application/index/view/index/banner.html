@@ -105,7 +105,7 @@
         position: absolute;
     }
     .content_card:hover .content_img{
-        transform: scale(1.2);
+        transform: scale(1.1);
     }
     .content_load_img {
         font-size: 30px;
@@ -152,7 +152,7 @@
         <a class="swiper-slide content_card" href="#">
             <div class="content_img_box">
                 <i class="content_load_img layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
-                <img class="content_img" lay-src="__STATIC__/{$g.image}">
+                <img class="content_img" lay-src="__IMAGE__/{$g.image}">
             </div>
             <div class="content_info">
                 <p class="content_info_p">{$g.name}</p>
@@ -171,7 +171,7 @@
         loop: true,
         // 自动循环
         autoplay: {
-            delay: 3000
+            delay: 5000
         },
         // 分页器
         pagination: {

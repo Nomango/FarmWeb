@@ -30,7 +30,7 @@ class AdminLoginController extends Controller
         if ($result) {
             return $this->redirect(url('Admin/index'));
         } else {
-            return $this->error('用户名不存在', url('index'));
+            return $this->error('用户名或密码错误', url('index'));
         }
     }
 

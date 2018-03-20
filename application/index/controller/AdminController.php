@@ -10,8 +10,8 @@ namespace app\index\controller;
 
 
 use think\Controller;
-use app\common\Model\Admin;
-use app\common\Model\User;
+use app\common\model\Admin;
+use app\common\model\User;
 use app\common\model\Goods;
 use app\common\model\Order;
 use think\Request;
@@ -31,30 +31,24 @@ class AdminController extends Controller
 
     public function index()
     {
-        $pageSize = 5; // 每页显示5条数据
-
         $Order = new Order;
-        $orders = $Order->with(['user','goods'])->paginate($pageSize);
+        $orders = $Order->with(['user','goods'])->paginate(5,true);
         $this->assign('orders', $orders);
-        return $this->fetch('admin/index');
+        return $this->fetch();
     }
 
     public function usermanage()
     {
-        $pageSize = 5; // 每页显示5条数据
-
         $User = new User;
-        $users = $User->where('delete', '=', 0)->paginate($pageSize);
+        $users = $User->where('delete', '=', 0)->paginate(5,true);
         $this->assign('users', $users);
         return $this->fetch();
     }
 
     public function goodsmanage()
     {
-        $pageSize = 5; // 每页显示5条数据
-
         $Goods = new Goods;
-        $goods = $Goods->with(['category'])->paginate($pageSize);
+        $goods = $Goods->with(['category'])->paginate(5,true);
         $this->assign('goods', $goods);
         return $this->fetch();
     }
@@ -76,5 +70,37 @@ class AdminController extends Controller
             }
         }
         return json(['result' => false, 'msg' => '删除失败！找不到该用户或保存时出现错误']);
+    }
+
+    public function addGoods()
+    {
+        $postData = Request::instance()->param();
+        $goods = new Goods();
+        $goods['name'] = $postData['name'];
+        $goods['price'] = $postData['price'];
+        $goods['number'] = $postData['number'];
+        $goods['image'] = $this->upload();
+        $goods['category_id'] = $postData['category_id'];
+
+        $goods->save();
+        $this->redirect(url('Admin/goodsmanage'));
+    }
+
+    public function upload()
+    {
+        // 获取表单上传文件 例如上传了001.jpg
+        $file = request()->file('image');
+
+        // 移动到框架应用根目录/public/uploads/ 目录下
+        if($file){
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'static' . DS . 'image');
+            if($info){
+                return $info->getSaveName();
+            } else {
+                // 上传失败获取错误信息
+                echo $file->getError();
+            }
+        }
+        return "";
     }
 }
