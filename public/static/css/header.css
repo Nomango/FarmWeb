@@ -14,6 +14,25 @@ header{
     height: 55px;
     background-color: #fff;
 }
+.header-title-box {
+    display: inline-block;
+    float: left;
+    margin-left: 100px;
+}
+.header-title-logo {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+.header-title {
+    display: inline-block;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 55px;
+    margin-left: 15px;
+}
 .header_a{
     display: inline-block;
     font-size: 14px;
@@ -25,6 +44,7 @@ header{
     text-align: center;
     line-height: 55px;
     transition: all .2s;
+    margin-left: -4px;
 }
 .header_a:hover{
     background-color: #9ccc65;
