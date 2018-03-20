@@ -24,6 +24,11 @@ header{
     text-decoration: none;
     text-align: center;
     line-height: 55px;
+    transition: all .2s;
+}
+.header_a:hover{
+    background-color: #9ccc65;
+    color: #FFFFFF;
 }
 .header_a_focus{
     background-color: #9ccc65;

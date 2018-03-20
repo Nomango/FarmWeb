@@ -10,9 +10,8 @@ class IndexController extends Controller
     public function index()
     {
         // 检查用户是否登录
-        $isLogin = User::isLogin();
         $user = null;
-        if ($isLogin) {
+        if (User::isLogin()) {
             $user = User::getInfo();
         }
         // 获取商品信息
@@ -21,11 +20,12 @@ class IndexController extends Controller
         $goods2 = $goods->where('category_id', '=', '2')->limit('0', '12')->select();
         $goods3 = $goods->where('category_id', '=', '3')->limit('0', '12')->select();
         $goods = array_merge($goods1, $goods2, $goods3);
-        return $this->fetch('index', [
-            'isLogin' => $isLogin,
+        $this->assign([
             'user' => $user,
             'goods' => $goods,
+            'isIndex' => true
         ]);
+        return $this->fetch();
     }
 
     public function insert()

@@ -15,6 +15,8 @@
 </head>
 
 <body>
+
+{include file="layout/header" /}
 <div class="input-box">
     <div class="input-box-title">
         <span>注册</span>
@@ -32,10 +34,10 @@
     <input id="user-phone" class="input-box-text" type="text" placeholder="手机号（选填）" onblur="checkPhone()" />
     <button class="input-box-btn" type="submit">注册</button>
 </div>
+
+{include file="layout/footer" /}
+
 <script>
-    window.onresize = function(){
-        window.location.reload()
-    };
     $(document).ready(function(){
         $('.input-box-btn').click(function () {
             if (checkAll()) {

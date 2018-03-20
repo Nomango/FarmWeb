@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="__STATIC__/css/inputbox.css">
 </head>
 <body>
+{include file="layout/header" /}
 <div class="input-box">
     <div class="input-box-title">
         <span>登陆</span>
@@ -19,10 +20,8 @@
     <a href="#" style="float:right;text-decoration:none;color:#353535;margin-right: 20px;">忘记密码？</a>
     <button class="input-box-btn" type="submit">登陆</button>
 </div>
+{include file="layout/footer" /}
 <script>
-    window.onresize = function(){
-        window.location.reload()
-    };
     window.onload = function(){
         var oUser = document.getElementById('user-name');
         var oPswd = document.getElementById('user-pswd');
