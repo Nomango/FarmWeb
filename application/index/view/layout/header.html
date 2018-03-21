@@ -14,7 +14,7 @@
         <a href="#" class="header_a<?php if(isset($isHall)) { ?> header_a_focus<?php } ?>">交易大厅</a>
         <a href="#" class="header_a<?php if(isset($isConnect)) { ?> header_a_focus<?php } ?>">联系我们</a>
 
-        {if condition="$Think.session.userId" }
+        {if condition="$Think.session.userid" }
         <div href="" class="header_userinfo header_login_btn" id="header_userinfo">
             <span class="header_username">{$user.nickname}</span>
             <i class="fas fa-angle-down" style="color: #808080;"></i>

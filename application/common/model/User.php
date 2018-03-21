@@ -10,6 +10,7 @@ namespace app\common\model;
 
 
 use think\Model;
+use think\Session;
 
 class User extends Model
 {
@@ -24,7 +25,9 @@ class User extends Model
             // 验证密码是否正确
             if ($user->checkPassword($password)) {
                 // 登录
-                session('userId', $user->getData('id'));
+                Session::set('userid', $user->getData('id'));
+                // 记录登陆时间
+                Session::set('logintime', time());
                 return true;
             }
         }
@@ -34,22 +37,31 @@ class User extends Model
     static public function logOut()
     {
         // 销毁session中数据
-        session('userId', null);
+        Session::pull('userid');
         return true;
     }
 
     static public function isLogin()
     {
-        $userId = session('userId');
+        $userId = Session::get('userid');
+        $logintime = Session::get('logintime');
 
-        // isset()和is_null()是一对反义词
-        return isset($userId);
+        if (isset($userId) && isset($logintime)) {
+            // 一小时失效
+            if ((time() - $logintime) > 3600) {
+                Session::pull('logintime');
+                Session::pull('userid');
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     static public function getInfo()
     {
         if (self::isLogin()) {
-            return self::get(session('userId'));
+            return self::get(Session::get('userid'));
         }
         return null;
     }

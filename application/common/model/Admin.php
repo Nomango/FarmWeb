@@ -23,6 +23,8 @@ class Admin extends Model
             if ($admin->checkPassword($password)) {
                 // 登录
                 session('adminId', $admin->getData('id'));
+                // 记录登陆时间
+                session('adminlogintime', time());
                 return true;
             }
         }
@@ -39,9 +41,18 @@ class Admin extends Model
     static public function isLogin()
     {
         $userId = session('adminId');
+        $logintime = session('adminlogintime');
 
-        // isset()和is_null()是一对反义词
-        return isset($userId);
+        if (isset($userId) && isset($logintime)) {
+            // 一小时失效
+            if ((time() - $logintime) > 3600) {
+                session('adminlogintime', null);
+                session('adminId', null);
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function checkPassword($password)
