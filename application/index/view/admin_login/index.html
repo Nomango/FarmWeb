@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>登陆后台</title>
+    <link rel="stylesheet" href="__STATIC__/lib/layui/css/layui.css">
+    <script src="__STATIC__/lib/layui/layui.js"></script>
     <style>
         *{
             padding: 0;
@@ -63,25 +65,75 @@
         .box_btn:focus{
             outline: none;
         }
+        .code
+        {
+            display: inline-block;
+            font-family:Arial;
+            font-style:italic;
+            color:blue;
+            font-size:22px;
+            padding:2px 3px;
+            letter-spacing:3px;
+            font-weight:bolder;
+            cursor:pointer;
+            width:150px;
+            height:36px;
+            line-height:36px;
+            text-align:center;
+            vertical-align:middle;
+            border: 1px solid #BDBDBD;
+        }
     </style>
 </head>
-<body>
+<body onload="createCode()">
     <p class="title">后台管理系统</p>
     <div class="box">
         <div class="box_title">
             <p class="box_p">管理员登录</p>
         </div>
-        <form action="{:url('login')}" method="post">
+        <form action="{:url('login')}" method="post" onsubmit="return validateCode();">
             <input type="text" name="account" class="box_input" placeholder="账号">
             <input type="password" name="password" class="box_input" placeholder="密码">
-            <input type="text" class="box_input" placeholder="验证码" style="width: 160px">
+            <input type="text" id="inputCode" class="box_input" placeholder="验证码" style="width: 160px">
+            <div class="code" id="checkCode" onclick="createCode()" ></div>
             <button class="box_btn">登录</button>
         </form>
     </div>
 </body>
-<script>
-    window.onresize = function(){
-        window.location.reload()
-    };
+<script type="text/javascript">
+    var code;
+    layui.use('layer');
+    function createCode()
+    {
+        code = "";
+        var codeLength = 4; //验证码的长度
+        var checkCode = document.getElementById("checkCode");
+        var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+        for(var i = 0; i < codeLength; i++)
+        {
+            var charNum = Math.floor(Math.random() * 52);
+            code += codeChars[charNum];
+        }
+        if(checkCode)
+        {
+            checkCode.className = "code";
+            checkCode.innerHTML = code;
+        }
+    }
+    function validateCode()
+    {
+        var inputCode=document.getElementById("inputCode").value;
+        if(inputCode.length <= 0) {
+            layui.layer.msg("请输入验证码！");
+        } else if(inputCode.toUpperCase() != code.toUpperCase()) {
+            layui.layer.msg("验证码输入有误！");
+            createCode();
+        } else {
+            return true;
+        }
+        return false;
+    }
 </script>
 </html>

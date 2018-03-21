@@ -33,7 +33,10 @@ class AdminController extends Controller
     {
         $Order = new Order;
         $orders = $Order->with(['user','goods'])->paginate(5,true);
-        $this->assign('orders', $orders);
+        $this->assign([
+            'orders'=> $orders,
+            'index'=> 1
+        ]);
         return $this->fetch();
     }
 
@@ -41,7 +44,10 @@ class AdminController extends Controller
     {
         $User = new User;
         $users = $User->where('delete', '=', 0)->paginate(5,true);
-        $this->assign('users', $users);
+        $this->assign([
+            'users'=> $users,
+            'index'=> 2
+        ]);
         return $this->fetch();
     }
 
@@ -49,7 +55,10 @@ class AdminController extends Controller
     {
         $Goods = new Goods;
         $goods = $Goods->with(['category'])->paginate(5,true);
-        $this->assign('goods', $goods);
+        $this->assign([
+            'goods'=> $goods,
+            'index'=> 3
+        ]);
         return $this->fetch();
     }
 

@@ -142,7 +142,9 @@ return [
     'view_replace_str'       => [
         '__STATIC__' => '/FarmWeb/public/static',
         '__ROOT__' => '/FarmWeb/public/index',
-        '__IMAGE__' => '/FarmWeb/public/static/image'
+        '__IMAGE__' => '/FarmWeb/public/static/image',
+        '__CSS__' => '/FarmWeb/public/static/css',
+        '__JS__' => '/FarmWeb/public/static/js',
     ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
@@ -236,7 +238,7 @@ return [
 
     //分页配置
     'paginate'               => [
-        'type'      => 'bootstrap',
+        'type'      => '\app\common\pageinator\MyPageinator',
         'var_page'  => 'page',
         'list_rows' => 5,
     ],

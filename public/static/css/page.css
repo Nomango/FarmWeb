@@ -1,0 +1,22 @@
+.pager {
+    float: right;
+    padding-right: 50px;
+}
+.pager li {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    border: 1px solid #808080;
+    text-align: center;
+    line-height: 30px;
+}
+.pager li a {
+    color: #585858;
+    text-decoration: none;
+}
+.pager li:hover a {
+    color: #424242;
+}
+.pager .disabled {
+    display: none;
+}

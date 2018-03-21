@@ -4,21 +4,12 @@
     <meta charset="UTF-8">
     <title>用户后台管理</title>
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
-    <script src="__STATIC__/lib/layer/layer.js"></script>
-    <link rel="stylesheet" href="__STATIC__/lib/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="__STATIC__/css/admin_index.css">
+    <link rel="stylesheet" href="__CSS__/admin_index.css">
+    <link rel="stylesheet" href="__CSS__/page.css">
 </head>
 <body>
 <div class="admin_box">
-    <div class="nav">
-        <div style=";width: 100%;">
-            <p class="card_title_p1"style="margin-left: 36.765px">欢迎您: </p><span class="card_title_p1"> locust</span>
-            <a  href="{:url('AdminLogin/logOut')}" class="logout_btn">注销</a>
-        </div>
-        <button class="nav_btn" onclick="javascrtpt:window.location.href='{:url(\'index\')}'">订单管理</button>
-        <button class="nav_btn nav_btn_focus" onclick="javascrtpt:window.location.href='{:url(\'usermanage\')}'">用户管理</button>
-        <button class="nav_btn " onclick="javascrtpt:window.location.href='{:url(\'goodsmanage\')}'">商品管理</button>
-    </div>
+    {include file="layout/admin_bar" /}
     <div class="content">
     <div class="card" style="display: block;">
         <div style="width: 100%;height: 90%">
