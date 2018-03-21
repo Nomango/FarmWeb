@@ -34,6 +34,11 @@ class IndexController extends Controller
 
     public function connect()
     {
+        // 传递用户信息
+        if (User::isLogin()) {
+            $user = User::getInfo();
+            $this->assign('user', $user);
+        }
         $this->assign([
             'isConnect' => true
         ]);
