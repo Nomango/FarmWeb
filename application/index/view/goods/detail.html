@@ -3,67 +3,215 @@
 <head>
     <meta charset="UTF-8">
     <title>商品详情</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.1.6/js/swiper.min.js"></script>
     <style>
-        .goods_box {
-            height: 600px;
+        .goods-box {
+            min-height: 550px;
             width: 800px;
             border: 1px solid #DEDEDE;
             margin: 20px auto 20px;
             background-color: #FFF;
             padding: 20px;
         }
-        .goods_image {
+        .goods-box-above {
+            width: 100%;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #EEEEEE;
+            margin-bottom: 20px;
+        }
+        .goods-image {
             display: inline-block;
-            width: 250px;
+            width: 350px;
             height: auto;
             vertical-align: top;
-            margin: 10px;
+            margin: 15px;
         }
-        .goods_info {
+        .goods-info {
             display: inline-block;
             width: 350px;
             margin-left: 35px;
             word-break: break-all;
         }
-        .goods_name {
+        .goods-name {
             font-size: 28px;
             font-weight: bolder;
             line-height: 45px;
         }
-        .goods_item {
+        .goods-item {
             line-height: 35px;
         }
-        .layui-btn.goods_buy {
+        .layui-btn.goods-buy {
             width: 120px;
             margin-top: 20px;
+        }
+        .goods-content-box {
+            width: 100%;
+        }
+        .goods-content-title {
+            font-size: 24px;
+            color: #8bc34a;
+            line-height: 35px;
+            margin-left: 15px;
+        }
+        .goods-content {
+            margin: 15px;
+        }
+        .swiper-container {
+            width: 660px;
+            height: 200px;
+            margin: 45px 20px 10px;
+        }
+        .swiper-button {
+            width: 40px;
+            height: 220px;
+            display: inline-block;
+            position: relative;
+            vertical-align: top;
+        }
+        .content_card{
+            display: inline-block;
+            width: 150px;
+            height: 40px;
+            transition: box-shadow .3s;
+            text-decoration: none;
+        }
+        .content_img_box {
+            width: 100%;
+            height: 120px;
+            overflow: hidden;
+            background-color: #FFF;
+            position: relative;
+        }
+        .content_img{
+            width: 100%;
+            height: 100px;
+            transition: transform .3s;
+            position: absolute;
+        }
+        .content_load_img {
+            font-size: 30px;
+            color: #808080;
+            width: 18px;
+            height: 18px;
+            padding: 55px 55px;
+            position: absolute;
+        }
+        .content_info{
+            width: auto;
+            height: 80px;
+            background-color: #FFFFFF;
+        }
+        .content_info_p{
+            color: #353535;
+            font-size: 14px;
+            line-height: 15px;
+            text-align: center;
+            padding: 5px 0;
         }
     </style>
 </head>
 <body>
 {include file="layout/header" /}
 
-<div class="goods_box">
-    <img class="goods_image" src="__IMAGE__/{$goods.image}" alt="{$goods.name}">
-    <span class="goods_info">
-        <div class="goods_name">{$goods.name}</div>
-        <div class="goods_item">售价：&nbsp;{$goods.price}</div>
-        <div class="goods_item">商品简介：&nbsp;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
-        <div class="goods_item">库存：&nbsp;{$goods.number}</div>
-        <div class="goods_item">
-            <span class="goods_item">数量：&nbsp;</span>
-            <span class="layui-btn-group">
-                <button class="layui-btn layui-btn-sm">
-                    <i class="fa fa-plus-square"></i>
-                </button>
-                <button class="layui-btn layui-btn-sm" style="cursor: auto;">10</button>
-                <button class="layui-btn layui-btn-sm">
-                    <i class="fa fa-minus-square"></i>
-                </button>
-            </span>
-        </div>
-        <button class="goods_buy layui-btn">购买</button>
-    </span>
+<div class="goods-box">
+    <div class="goods-box-above">
+        <img class="goods-image" src="__IMAGE__/{$goods.image}" alt="{$goods.name}">
+        <span class="goods-info">
+            <div class="goods-name">{$goods.name}</div>
+            <div class="goods-item">售价：&nbsp;{$goods.price}&nbsp;元</div>
+            <div class="goods-item">商品简介：&nbsp;{$goods.description}</div>
+            <div class="goods-item">库存：&nbsp;{$goods.number}</div>
+            <div class="goods-item">
+                <span class="goods-item">数量：&nbsp;</span>
+                <span class="layui-btn-group">
+                    <button class="layui-btn layui-btn-sm" onclick="addNumber()">
+                        <i class="fa fa-plus-square"></i>
+                    </button>
+                    <button id="buy-number" class="layui-btn layui-btn-sm" style="cursor: auto;">1</button>
+                    <button class="layui-btn layui-btn-sm" onclick="minusNumber()">
+                        <i class="fa fa-minus-square"></i>
+                    </button>
+                </span>
+            </div>
+            <button class="goods-buy layui-btn" onclick="buy()">购买</button>
+        </span>
+    </div>
+    <div class="goods-content-box">
+        <div class="goods-content-title">商品详情</div>
+        <p class="goods-content">{$goods.content}</p>
+    </div>
 </div>
+
+<div class="goods-box" style="min-height: 200px;">
+    <div style="font-size: 24px;color: #353535;line-height: 35px;margin-left: 15px;">相关推荐</div>
+    <!-- 导航按钮 -->
+    <div class="swiper-button swiper-button-prev swiper-button-black"></div>
+    <!-- 轮播图 -->
+    <div class="swiper-container" style="display: inline-block;vertical-align: top">
+        <div class="swiper-wrapper">
+            {volist name="goods_recommoned" id="g"}
+            <a class="swiper-slide content_card" href="{:url('Goods/detail?id='.$g.id)}">
+                <div class="content_img_box">
+                    <i class="content_load_img layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
+                    <img class="content_img" lay-src="__IMAGE__/{$g.image}">
+                </div>
+                <div class="content_info">
+                    <p class="content_info_p">{$g.name}</p>
+                    <p class="content_info_p" style="color: #808080">{:ceil($g.price)}&nbsp;元</p>
+                </div>
+            </a>
+            {/volist}
+        </div>
+    </div>
+    <div class="swiper-button swiper-button-next swiper-button-black"></div>
+</div>
+
+<script>
+    function addNumber() {
+        var oNumber = $('#buy-number');
+        var n = parseInt(oNumber.text());
+        if (n < 99) {
+            n++;
+        }
+        oNumber.html(n);
+    }
+    function minusNumber() {
+        var oNumber = $('#buy-number');
+        var n = parseInt(oNumber.text());
+        if (n > 1) {
+            n--;
+        }
+        oNumber.html(n);
+    }
+    function buy() {
+        // 购买商品
+        location.href = '{:url("Goods/purchase")}' + '?id=' + '{$goods.id}' + '&number=' + $('#buy-number').text();
+    }
+</script>
+<script>
+    // 轮播图脚本
+    new Swiper ('.swiper-container', {
+        direction: 'horizontal',
+        loop: true,
+        slidesPerView: 5,
+        spaceBetween: 10,
+        // 自动循环
+        autoplay: {
+            delay: 5000
+        },
+        // 前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        uniqueNavElements: false,
+    });
+    // 图片懒加载
+    layui.use('flow', function () {
+        layui.flow.lazyimg();
+    })
+</script>
 
 {include file="layout/footer" /}
 </body>

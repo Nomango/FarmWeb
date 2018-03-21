@@ -100,11 +100,11 @@ class AdminController extends Controller
         // 获取表单上传文件 例如上传了001.jpg
         $file = request()->file('image');
 
-        // 移动到框架应用根目录/public/uploads/ 目录下
+        // 移动到框架应用根目录/public/static/image/upload/ 目录下
         if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'static' . DS . 'image');
+            $info = $file->move(ROOT_PATH . 'public' . DS . 'static' . DS . 'image' . DS . 'upload');
             if($info){
-                return $info->getSaveName();
+                return 'upload/'.$info->getSaveName();
             } else {
                 // 上传失败获取错误信息
                 echo $file->getError();

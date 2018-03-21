@@ -24,7 +24,7 @@
         width: 850px;
         overflow: hidden;
         margin: 0 auto 120px;
-        padding: 60px 0 20px;
+        padding: 60px 1px 20px;
     }
     .swiper-button-prev {
         background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%238BC34A'%2F%3E%3C%2Fsvg%3E");
@@ -85,6 +85,7 @@
         height: 240px;
         margin-top: 10px;
         transition: box-shadow .3s;
+        box-shadow: 0 0 5px #808080;
         text-decoration: none;
     }
     .content_card:hover{
@@ -130,15 +131,15 @@
 
 <section class="swiper-container">
     <div class="swiper-wrapper">
-        {for start="1" end="6" name="i"}
-        <div class="swiper-slide banner-image" style="background-image: url('__STATIC__/image/banner/banner{$i}.jpg')"></div>
-        {/for}
+        {volist name="banners" id="banner"}
+        <div class="swiper-slide banner-image" style="background-image: url('__IMAGE__/banner/{$banner.image}')"></div>
+        {/volist}
     </div>
     <!-- 分页器 -->
     <div class="swiper-pagination"></div>
     <!-- 导航按钮 -->
-    <div class="swiper-button swiper-button-prev swiper-button-gary"></div>
-    <div class="swiper-button swiper-button-next swiper-button-gary"></div>
+    <div class="swiper-button swiper-button-prev"></div>
+    <div class="swiper-button swiper-button-next"></div>
 </section>
 <section class="nav">
     <div class="nav_box">

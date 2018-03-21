@@ -46,6 +46,11 @@
             width: 100%;
             margin: auto;
         }
+        .commodity_desc {
+            width: 40%;
+            text-align: left;
+            margin-left: 15px;
+        }
     </style>
 </head>
 <body>
@@ -87,27 +92,26 @@
                     </div>
                 </form>
                 <div class="card_nav">
-                    <p class="card_nav_p ">产品</p>
-                    <p class="card_nav_p ">价格</p>
-                    <p class="card_nav_p ">库存</p>
-                    <p class="card_nav_p ">总销量</p>
-                    <p class="card_nav_p ">创建时间</p>
-                    <p class="card_nav_p ">操作</p>
+                    <p class="card_nav_p " style="width:32%;">产品</p>
+                    <p class="card_nav_p " style="width:16%;">价格</p>
+                    <p class="card_nav_p " style="width:8%;">库存</p>
+                    <p class="card_nav_p " style="width:8%;">总销量</p>
+                    <p class="card_nav_p " style="width:16%;">创建时间</p>
+                    <p class="card_nav_p " style="width:16%;">操作</p>
                 </div>
                 {volist name="goods" id="g"}
                 <div class="card_content">
-                    <div class="card_nav_p">
+                    <div class="card_nav_p" style="width:32%;">
                         <img src="__IMAGE__/{$g.image}" class="commodity_img">
                         <div class="commodity_desc">
                             <p class="commodity_p" style="margin: 0">{$g.name}</p>
-                            <p class="commodity_p">{$g.number}</p>
                         </div>
                     </div>
-                    <p class="card_nav_p ">{$g.price}</p>
-                    <p class="card_nav_p ">{$g.number}</p>
-                    <p class="card_nav_p ">{$g.number}</p>
-                    <p class="card_nav_p ">{$g.create_time}</p>
-                    <p class="card_nav_p " style="color: #2e6da4;font-size: 14px">编辑产品</p>
+                    <p class="card_nav_p" style="width:16%;">{$g.price}</p>
+                    <p class="card_nav_p" style="width:8%;">{$g.number}</p>
+                    <p class="card_nav_p" style="width:8%;">{$g.number}</p>
+                    <p class="card_nav_p" style="width:16%;">{$g.create_time}</p>
+                    <a class="card_nav_p" href="#" style="width:16%;color:#2e6da4;text-decoration:none;">编辑产品</a>
                 </div>
                 {/volist}
             </div>
