@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css" integrity="sha384-v2Tw72dyUXeU3y4aM2Y0tBJQkGfplr39mxZqlTBDUZAb9BGoC40+rdFCG0m10lXk" crossorigin="anonymous">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/fontawesome.css" integrity="sha384-q3jl8XQu1OpdLgGFvNRnPdj5VIlCvgsDQTQB6owSOHWlAurxul7f+JpUOVdAiJ5P" crossorigin="anonymous">
 <link rel="stylesheet" href="__STATIC__/lib/layui/css/layui.css">
+<script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
 <script src="__STATIC__/lib/layui/layui.js"></script>
 <script src="__STATIC__/js/common.js"></script>
 <header>
@@ -10,9 +11,9 @@
         <p class="header-title">农副产品旅游手工艺交易平台</p>
     </div>
     <div style="float: right">
-        <a href="__ROOT__" class="header_a<?php if(isset($isIndex)) { ?> header_a_focus<?php } ?>">首页</a>
-        <a href="#" class="header_a<?php if(isset($isHall)) { ?> header_a_focus<?php } ?>">交易大厅</a>
-        <a href="#" class="header_a<?php if(isset($isConnect)) { ?> header_a_focus<?php } ?>">联系我们</a>
+        <a href="{:url('Index/index')}" class="header_a<?php if(isset($isIndex)) { ?> header_a_focus<?php } ?>">首页</a>
+        <a href="{:url('Goods/index')}" class="header_a<?php if(isset($isHall)) { ?> header_a_focus<?php } ?>">交易大厅</a>
+        <a href="{:url('Index/connect')}" class="header_a<?php if(isset($isConnect)) { ?> header_a_focus<?php } ?>">联系我们</a>
 
         {if condition="$Think.session.userid" }
         <div href="" class="header_userinfo header_login_btn" id="header_userinfo">
@@ -20,7 +21,7 @@
             <i class="fas fa-angle-down" style="color: #808080;"></i>
             <div class="header_userinfo_list" id="header_userinfo_list">
                 <a href="{:url('User/index')}" class="header_userinfo_list_a">个人资料</a>
-                <a href="#" class="header_userinfo_list_a">我的订单</a>
+                <a href="{:url('User/orders')}" class="header_userinfo_list_a">我的订单</a>
                 <a href="{:url('Login/logOut')}" class="header_userinfo_list_a">退出</a>
             </div>
         </div>

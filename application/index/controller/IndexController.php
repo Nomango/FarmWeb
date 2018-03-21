@@ -28,6 +28,14 @@ class IndexController extends Controller
         return $this->fetch();
     }
 
+    public function connect()
+    {
+        $this->assign([
+            'isConnect' => true
+        ]);
+        return $this->fetch();
+    }
+
     protected function insert()
     {
         for ($i = 0; $i < 20; $i++)

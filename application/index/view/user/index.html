@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="__STATIC__/lib/jquery/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="__STATIC__/css/header.css">
     <link rel="stylesheet" href="__STATIC__/css/user_info.css">
     <style>
         .personal_content{
@@ -80,27 +79,8 @@
     </style>
 </head>
 <body>
-<header>
-    <div style="float: right">
-        <a href="" class="header_a header_a_focus">首页
-        </a><a href="" class="header_a">交易大厅
-    </a><a href="" class="header_a">联系我们
-    </a>{if condition="$Think.session.userid" }<div href="" class="header_a" style="width: 180px;position:relative;" id="header_a_">
-        <p style="display: inline-block;font-size: 14px;color: #9e9e9e">昵称</p>
-        <img src="__STATIC__/image/down.png" style="display: inline-block;width: 14px;vertical-align: middle">
-        <div class="header_a_list" id="header_a_list">
-            <a href="" class="header_a_list_a">个人资料</a>
-            <a href="" class="header_a_list_a">我的订单</a>
-            <a href="" class="header_a_list_a">分类一组</a>
-            <a href="" class="header_a_list_a">分类一组</a>
-            <a href="" class="header_a_list_a">退出</a>
-        </div>
-    </div>
-        {else/}
-        <a href="{:url('Login/index')}" class="header_a">登录</a><a href="{:url('Register/index')}" class="header_a">注册</a>
-        {/if}
-    </div>
-</header>
+{include file="layout/header" /}
+
 <section class="personal">
     <div class="personal_nav">
         <p class="personal_nav_p_bold">账号管理</p>
@@ -138,11 +118,10 @@
         </div>
     </div>
 </section>
+
+{include file="layout/footer" /}
 </body>
 <script>
-    window.onresize = function(){
-        window.location.reload()
-    };
     var box_width = $("#personal_content_box").width();
     var line_width = box_width - 151;
     $("#line_3").width(line_width);

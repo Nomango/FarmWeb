@@ -29,6 +29,7 @@ body{
     vertical-align: top;
 }
 .nav_btn{
+    display: block;
     width: 156px;
     height: 64px;
     background-color: #8bc34a;
@@ -36,6 +37,9 @@ body{
     font-size: 18px;
     border: none;
     cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    line-height: 64px;
 }
 .nav_btn_focus{
     background-color: #FFFFFF;

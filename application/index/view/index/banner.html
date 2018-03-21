@@ -148,7 +148,7 @@
 <section class="swiper-container-nav">
     <div class="swiper-wrapper" >
         {volist name="goods" id="g"}
-        <a class="swiper-slide content_card" href="#">
+        <a class="swiper-slide content_card" href="{:url('Goods/detail?id='.$g.id)}">
             <div class="content_img_box">
                 <i class="content_load_img layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
                 <img class="content_img" lay-src="__IMAGE__/{$g.image}">

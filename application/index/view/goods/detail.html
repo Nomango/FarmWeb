@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <style>
+        .goods_box {
+            height: 600px;
+            width: 800px;
+            border: 1px solid #DEDEDE;
+            margin: 20px auto 20px;
+            background-color: #FFF;
+            padding: 20px;
+        }
+        .goods_image {
+            display: inline-block;
+            width: 250px;
+            height: auto;
+            vertical-align: top;
+            margin: 10px;
+        }
+        .goods_info {
+            display: inline-block;
+            width: 350px;
+            margin-left: 35px;
+            word-break: break-all;
+        }
+        .goods_name {
+            font-size: 28px;
+            font-weight: bolder;
+            line-height: 45px;
+        }
+        .goods_item {
+            line-height: 35px;
+        }
+        .layui-btn.goods_buy {
+            width: 120px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+{include file="layout/header" /}
+
+<div class="goods_box">
+    <img class="goods_image" src="__IMAGE__/{$goods.image}" alt="{$goods.name}">
+    <span class="goods_info">
+        <div class="goods_name">{$goods.name}</div>
+        <div class="goods_item">售价：&nbsp;{$goods.price}</div>
+        <div class="goods_item">商品简介：&nbsp;XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div>
+        <div class="goods_item">库存：&nbsp;{$goods.number}</div>
+        <div class="goods_item">
+            <span class="goods_item">数量：&nbsp;</span>
+            <span class="layui-btn-group">
+                <button class="layui-btn layui-btn-sm">
+                    <i class="fa fa-plus-square"></i>
+                </button>
+                <button class="layui-btn layui-btn-sm" style="cursor: auto;">10</button>
+                <button class="layui-btn layui-btn-sm">
+                    <i class="fa fa-minus-square"></i>
+                </button>
+            </span>
+        </div>
+        <button class="goods_buy layui-btn">购买</button>
+    </span>
+</div>
+
+{include file="layout/footer" /}
+</body>
+</html>

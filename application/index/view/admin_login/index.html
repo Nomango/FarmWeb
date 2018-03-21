@@ -31,6 +31,7 @@
             width: 100%;
             height: 82px;
             background-color: #8bc34a;
+            margin-bottom: 30px;
         }
         .box_p{
             text-align: center;
@@ -41,8 +42,8 @@
         .box_input{
             width: 320px;
             height: 38px;
-            margin-top: 20px;
-            margin-left: 89px;
+            margin: 10px auto;
+            display: block;
             border: 1px solid #BDBDBD;
             text-indent: 10px;
         }
@@ -51,37 +52,40 @@
             outline: none;
         }
         .box_btn{
-            background-color: #8bc34a;
             display: block;
-            margin-top: 26px;
+            margin-top: 15px;
             width: 120px;
             height: 38px;
-            border: none;
+            border: 2px solid #8bc34a;
+            border-radius: 2px;
             margin-left: 189px;
             cursor: pointer;
-            color: #FFFFFF;
+            background-color: #FFF;
+            color: #8bc34a;
+            transition: all .3s;
             font-size: 16px;
         }
-        .box_btn:focus{
+        .box_btn:hover{
+            background-color: #8bc34a;
+            color: #FFF;
             outline: none;
         }
-        .code
-        {
+        .verfiy-code {
             display: inline-block;
-            font-family:Arial;
-            font-style:italic;
-            color:blue;
-            font-size:22px;
-            padding:2px 3px;
-            letter-spacing:3px;
-            font-weight:bolder;
-            cursor:pointer;
-            width:150px;
-            height:36px;
-            line-height:36px;
-            text-align:center;
-            vertical-align:middle;
+            font-family: Arial, sans-serif;
+            font-style: italic;
+            color: blue;
+            font-size: 22px;
+            letter-spacing: 3px;
+            font-weight: bolder;
+            cursor: pointer;
+            text-align: center;
+            width: 150px;
+            height: 38px;
+            line-height: 38px;
+            vertical-align: middle;
             border: 1px solid #BDBDBD;
+            margin-left: 14px;
         }
     </style>
 </head>
@@ -94,10 +98,13 @@
         <form action="{:url('login')}" method="post" onsubmit="return validateCode();">
             <input type="text" name="account" class="box_input" placeholder="账号">
             <input type="password" name="password" class="box_input" placeholder="密码">
-            <input type="text" id="inputCode" class="box_input" placeholder="验证码" style="width: 160px">
-            <div class="code" id="checkCode" onclick="createCode()" ></div>
+            <div style="margin: 10px auto;width: 322px;display: flex">
+                <input type="text" id="inputCode" class="box_input" placeholder="验证码" style="display: inline-block;width: 160px; margin: 0">
+                <div class="verfiy-code" id="checkCode" onclick="createCode()" ></div>
+            </div>
             <button class="box_btn">登录</button>
         </form>
+        <button class="box_btn" onclick="javascript:location.href='{:url(\'Index/index\')}'">回首页</button>
     </div>
 </body>
 <script type="text/javascript">
@@ -108,9 +115,7 @@
         code = "";
         var codeLength = 4; //验证码的长度
         var checkCode = document.getElementById("checkCode");
-        var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
+        var codeChars = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'); //所有候选组成验证码的字符，当然也可以用中文的
         for(var i = 0; i < codeLength; i++)
         {
             var charNum = Math.floor(Math.random() * 52);
@@ -118,7 +123,6 @@
         }
         if(checkCode)
         {
-            checkCode.className = "code";
             checkCode.innerHTML = code;
         }
     }

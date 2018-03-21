@@ -27,11 +27,28 @@ class UserController extends Controller
 
     public function index()
     {
+        $user = User::getInfo();
+        $this->assign([
+            'user' => $user,
+        ]);
         return $this->fetch();
     }
 
     public function address()
     {
+        $user = User::getInfo();
+        $this->assign([
+            'user' => $user,
+        ]);
+        return $this->fetch();
+    }
+
+    public function orders()
+    {
+        $user = User::getInfo();
+        $this->assign([
+            'user' => $user,
+        ]);
         return $this->fetch();
     }
 }
