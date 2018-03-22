@@ -4,13 +4,186 @@
     <meta charset="UTF-8">
     <title>交易大厅</title>
     {include file="layout/head" /}
+    <style>
+        .header-image-box {
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            height: 350px;
+        }
+        .hall-box {
+            width: 900px;
+            margin: 50px auto 30px;
+        }
+        .hall-title-box {
+            width: 100%;
+            height: 120px;
+            background-color: #EEEEEE;
+        }
+        .hall-title {
+            width: 120px;
+            height: 50px;
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 50px;
+            color: #FFF;
+            background-color: #8bc34a;
+            text-align: center;
+        }
+        .hall-warning {
+            padding: 20px 15px 10px 40px;
+        }
+        .hall-content {
+            width: 100%;
+            background-color: #FFF;
+        }
+        .hall-content-left {
+            width: 140px;
+            float: left;
+        }
+        .hall-content-btn {
+            width: 100%;
+            font-size: 16px;
+            line-height: 50px;
+            text-align: center;
+            color: #8bc34a;
+            background-color: #FFF;
+            transition: all .3s;
+            display: block;
+            text-decoration: none;
+        }
+        .hall-content-btn.focus{
+            color: #FFF;
+            background-color: #8bc34a;
+        }
+        .hall-content-btn:not(.focus):hover{
+            color: #FFF;
+            background-color: #8bc34a;
+        }
+        .hall-goods-box {
+            margin-left: 140px;
+            padding: 0 10px 20px;
+            border-left: 1px solid #EEEEEE;
+            min-height: 400px;
+        }
+        .content_card{
+            display: inline-block;
+            width: 230px;
+            height: 230px;
+            transition: box-shadow .3s;
+            box-shadow: 0 0 5px #808080;
+            text-decoration: none;
+            margin: 10px 5px;
+        }
+        .content_card:hover{
+            box-shadow: 0 0 15px #808080;
+        }
+        .content_img_box {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            background-color: #FFF;
+            position: relative;
+        }
+        .content_img{
+            width: 100%;
+            height: 150px;
+            transition: transform .3s;
+            position: absolute;
+        }
+        .content_card:hover .content_img{
+            transform: scale(1.1);
+        }
+        .content_load_img {
+            font-size: 30px;
+            color: #808080;
+            width: 30px;
+            height: 30px;
+            padding: 65px 88px;
+            position: absolute;
+        }
+        .content_info{
+            width: auto;
+            height: 80px;
+            background-color: #FFFFFF;
+        }
+        .content_info_p{
+            color: #353535;
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            padding: 10px 0 5px;
+        }
+    </style>
 </head>
 <body>
 {include file="layout/header" /}
 
-<div>
-    交易大厅
+<div class="header-image-box" style="background-image: url('__IMAGE__/background2.jpg')">
 </div>
+
+<div class="hall-box">
+    <div class="hall-title-box">
+        <div class="hall-title">交易大厅</div>
+        <div class="hall-warning">冷热交替，谨防感冒！！！！！！！</div>
+    </div>
+    <div class="hall-content">
+        <div class="hall-content-left">
+            <a href="{:url('Goods/index')}?id=1" class="hall-content-btn{eq name='category_id' value='1'} focus{/eq}">旅游业</a>
+            <a href="{:url('Goods/index')}?id=2" class="hall-content-btn{eq name='category_id' value='2'} focus{/eq}">手工艺</a>
+            <a href="{:url('Goods/index')}?id=3" class="hall-content-btn{eq name='category_id' value='3'} focus{/eq}">农产品</a>
+        </div>
+        <div id="hall-goods-box" class="hall-goods-box">
+            {volist name="goods" id="g"}
+            <a class="content_card" href="{:url('Goods/detail')}?id={$g.id}">
+                <div class="content_img_box">
+                    <i class="content_load_img layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>
+                    <img class="content_img" lay-src="__IMAGE__/{$g.image}">
+                </div>
+                <div class="content_info">
+                    <p class="content_info_p">{$g.name}</p>
+                    <p class="content_info_p" style="color: #808080">{:ceil($g.price)}&nbsp;元</p>
+                </div>
+            </a>
+            {/volist}
+        </div>
+    </div>
+</div>
+<script>
+    layui.use('flow', function () {
+        layui.flow.lazyimg();
+    });
+    layui.use('flow', function(){
+        var $ = layui.jquery; //不用额外加载jQuery，flow模块本身是有依赖jQuery的，直接用即可。
+        var flow = layui.flow;
+        flow.load({
+            elem: '#hall-goods-box', //指定列表容器
+            isAuto: false,
+            isLazyimg: true,
+            done: function(page, next){ //到达临界点（默认滚动触发），触发下一页
+                var lis = [];
+                //以jQuery的Ajax请求为例，请求下一页数据（注意：page是从2开始返回）
+                $.get('{:url("Goods/more")}'+'?page='+page+'&category_id='+{$category_id}, function(res) {
+                    //假设你的列表返回在data集合中
+                    if (page !== 1) {
+                        layui.each(res.data, function(index, item) {
+                            lis.push('<a class="content_card" href="{:url(\'Goods/detail\')}?id='+item.id+'">');
+                            lis.push('<div class="content_img_box"><i class="content_load_img layui-icon layui-anim layui-anim-rotate layui-anim-loop">&#xe63d;</i>');
+                            lis.push('<img class="content_img" lay-src="__IMAGE__/'+item.image+'"></div>');
+                            lis.push('<div class="content_info"><p class="content_info_p">'+item.name+'</p>');
+                            lis.push('<p class="content_info_p" style="color: #808080">'+Math.ceil(item.price)+'&nbsp;元</p>');
+                            lis.push('</div></a>');
+                        });
+                    }
+                    //执行下一页渲染，第二参数为：满足“加载更多”的条件，即后面仍有分页
+                    //pages为Ajax返回的总页数，只有当前页小于总页数的情况下，才会继续出现加载更多
+                    next(lis.join(''), page < res.pages);
+                });
+            }
+        });
+    });
+</script>
 
 {include file="layout/footer" /}
 </body>

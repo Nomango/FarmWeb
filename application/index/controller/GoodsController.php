@@ -19,15 +19,35 @@ class GoodsController extends Controller
 {
     public function index()
     {
+        $postData = Request::instance()->param();
+        if (isset($postData['id'])) {
+            $goods = Goods::where('category_id', '=', $postData['id'])->paginate(12);
+            $id = $postData['id'];
+        } else {
+            $goods = Goods::where('category_id', '=', 1)->paginate(12);
+            $id = 1;
+        }
         // 传递用户信息
         if (User::isLogin()) {
             $user = User::getInfo();
             $this->assign('user', $user);
         }
         $this->assign([
-            'isHall' => true
+            'isHall' => true,
+            'category_id' => $id,
+            'goods' => $goods,
         ]);
         return $this->fetch();
+    }
+
+    public function more()
+    {
+        $category_id = Request::instance()->param('category_id/d');
+        $goods = Goods::where('category_id', '=', $category_id)->paginate(12);
+        return json([
+            'data'=>$goods->items(),
+            'pages'=>$goods->lastPage()
+        ]);
     }
 
     public function detail()
