@@ -44,7 +44,6 @@ class LoginController extends Controller
     public function logOut()
     {
         User::logOut();
-        return $this->redirect(url('Index/index'));
     }
 
     public function test()
