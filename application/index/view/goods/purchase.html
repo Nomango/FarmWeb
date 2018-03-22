@@ -4,12 +4,172 @@
     <meta charset="UTF-8">
     <title>购买商品</title>
     {include file="layout/head" /}
+    <style>
+        .purchase{
+            height: 700px;
+            width: 100%;
+            margin: 20px auto 50px ;
+        }
+        .purchase_box{
+            background-color: #ffffff;
+            padding: 20px;
+            width: 800px;
+            margin: auto;
+            height: 100%;
+        }
+        .header_p{
+            font-weight: bold;
+            color: #000000;
+            font-size: 16px;
+        }
+        .buyers_info{
+            margin-top: 10px;
+        }
+        .content_p{
+            font-size: 16px;
+            color: #808080;
+        }
+        .content_p1{
+            font-size: 14px;
+        }
+        .p_list{
+            display: inline-block;
+            width: 152px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+        .null_box{
+            width: 100%;
+            height: 50px;
+            background-color: #e0e0e0;
+            border-top: 1px solid #9e9e9e;
+        }
+        .goods_box{
+            width: 100%;
+            height: 100px;
+        }
+        .list_img{
+            width: 80px;
+            height: 80px;
+        }
+        .p_list_1{
+            height: 100px;
+            line-height: 100px;
+            color: #000000;
+        }
+        .content_p2{
+            color: #000000;
+            line-height: 50px;
+            float: right;
+            font-size: 18px;
+        }
+        .content_p3{
+            font-size: 16px;
+        }
+        .buy_btn{
+            float: right;
+            margin-right: 70px;
+            height: 30px;
+            width: 100px;
+            display: block;
+            border: none;
+            background-color: #ffc107;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+        .info_box{
+            height: 100px;
+            border: 1.5px solid #ffc107;
+            width: auto;
+            float: right;
+            margin-top: 50px;
+            padding-left: 50px;
+            margin-right: 70px;
+            padding-right: 20px;
+        }
+    </style>
 </head>
 <body>
 {include file="layout/header"}
 
-<div>购买商品</div>
+<div class="purchase">
+    <div class="purchase_box">
+        <p class="header_p">确认收货地址</p>
+        <div class="buyers_info">
+            <span class="content_p" style="margin-right: 15px">{$user.area}</span><span style="color:#9e9e9e ">(</span><span class="content_p" style="margin-right: 5px">{$user.nickname}</span><span class="content_p">收)</span>
+            <p class="content_p content_p1" style="margin-top: 10px">{$user.address}</p>
+            <p class="content_p content_p1">{$user.phone}</p>
+        </div>
+        <p class="header_p" style="margin-top: 50px">确认订单信息</p>
+        <div style="margin-top: 20px">
+            <p class="content_p p_list p_null" style="height: 0"></p>
+            <p class="content_p p_list">商品属性</p>
+            <p class="content_p p_list">单价</p>
+            <p class="content_p p_list">数量</p>
+            <p class="content_p p_list">小计</p>
+        </div>
+        <div class="null_box"></div>
+        <div class="goods_box">
+            <div class="content_p p_list p_list_1">
+                <img class=" list_img" src="__IMAGE__/{$goods.image}">
+            </div>
+            <p class="content_p p_list p_list_1">{$goods.name}</p>
+            <p class="content_p p_list p_list_1">{$goods.price}</p>
+            <p class="content_p p_list p_list_1" id="goods_number">{$number}</p>
+            <p class="content_p p_list p_list_1" style="color: #dd4b39">{$total}</p>
+        </div>
+        <div class="null_box">
+            <span class="content_p content_p2" style="margin-right: 70px;color: #dd4b39">{$total}</span>
+            <span class="content_p content_p2" style="margin-left: 10px; color: #dd4b39">￥</span>
+            <span class=" content_p content_p2">合计:</span>
+        </div>
+        <div style="width: 100%;height: 153px">
+            <div class="info_box">
+                <div style="height: 40px;margin-top: 0px">
+                    <span class="content_p content_p2 content_p3" style="color: #dd4b39">{$total}</span>
+                    <span class="content_p content_p2 content_p3" style="margin-left: 10px; color: #dd4b39">￥</span>
+                    <span class=" content_p content_p2 content_p3">实付款:</span>
+                </div>
+                <div style="height: 50px;">
+                    <span class="content_p content_p2 content_p3" style=" color: #9e9e9e">{$user.address}</span>
+                    <span class="content_p content_p2 content_p3" style="margin-left: 10px; color: #9e9e9e">{$user.area}</span>
+                    <span class=" content_p content_p2 content_p3">发至:</span>
+                </div>
+            </div>
+        </div>
+        <button class="buy_btn" type="submit" onclick="buy({$goods.id})">购买</button>
+    </div>
+</div>
 
 {include file="layout/footer"}
 </body>
+<script>
+    layui.use("layer");
+    function buy(id) {
+        var id = id;
+        var number = $("#goods_number").text();
+        $.ajax({
+            data:{id:id,number:number},
+            url:'{:url("insertorder")}',
+            success:function (data) {
+                if(data['result'] == true){
+                    layer.open({
+                        icon : 1,
+                        title: '',
+                        content: '支付成功',
+                        yes: function() {
+                            window.location.href = '{:url("User/orders")}'
+                        }//如果设定了yes回调，需进行手工关闭
+                    });
+                }
+                else{
+                    alert(data['msg']);
+                }
+            }
+        });
+
+
+    }
+</script>
 </html>
