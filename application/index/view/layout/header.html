@@ -18,12 +18,26 @@
             <div class="header_userinfo_list" id="header_userinfo_list">
                 <a href="{:url('User/index')}" class="header_userinfo_list_a">个人资料</a>
                 <a href="{:url('User/orders')}" class="header_userinfo_list_a">我的订单</a>
-                <a href="{:url('Login/logOut')}" class="header_userinfo_list_a">退出</a>
+                <a href="javascript:void(0)" onclick="logout()" class="header_userinfo_list_a">退出</a>
             </div>
         </div>
         {else/}
-        <a href="{:url('Login/index')}" class="header_login_btn">登录</a>
+        <a href="{:url('Login/index')}" onclick="" class="header_login_btn">登录</a>
         <a href="{:url('Register/index')}" class="header_login_btn" style="margin-right: 100px">注册</a>
         {/if}
     </div>
+    <script>
+        function logout() {
+            $.ajax({
+                type: 'GET',
+                url: '{:url("Login/logOut")}',
+                success: function () {
+                    window.location.reload();
+                },
+                error: function () {
+                    window.location.reload();
+                },
+            })
+        }
+    </script>
 </header>

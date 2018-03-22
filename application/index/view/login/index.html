@@ -41,6 +41,11 @@
         };
         // 用户登陆
         $('.input-box-btn').click(function () {
+            // 如果复选框是勾选状态则保存cookie
+            if(oRemember.checked){
+                setCookie('farm-user-name', oUser.value, 3); //保存帐号到cookie，有效期3天
+                setCookie('farm-user-pswd', oPswd.value, 3); //保存密码到cookie，有效期3天
+            }
             $.ajax({
                 type: 'POST',
                 data: {
@@ -49,7 +54,11 @@
                 },
                 url: '{:url("login")}',
                 success: function (data) {
-                    UserLogin(data['result'], oRemember.checked, oUser.value, oPswd.value);
+                    if (!data['result']) {
+                        layui.layer.alert('用户名或密码错误！', {icon:5});
+                    } else {
+                        location.href = document.referrer;
+                    }
                 },
                 error: function () {
                     layui.layer.alert('服务器飘去远方了...', {icon:5});
@@ -57,19 +66,6 @@
             });
         });
     };
-    //用户登陆
-    function UserLogin(result, checked, user, pswd) {
-        if (result) {
-            location.href = "{:url('Index/index')}";
-            // 如果复选框是勾选状态则保存cookie
-            if(checked){
-                setCookie('farm-user-name', user, 3); //保存帐号到cookie，有效期3天
-                setCookie('farm-user-pswd', pswd, 3); //保存密码到cookie，有效期3天
-            }
-        } else {
-            layui.layer.alert('用户名或密码错误！', {icon:5});
-        }
-    }
     //设置cookie
     function setCookie(name,value,day){
         var date = new Date();
