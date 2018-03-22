@@ -60,6 +60,11 @@ class GoodsController extends Controller
         //获取购买商品的id
         $id = Request::instance()->param('id/d');
         $number = Request::instance()->param('number/d');
+        // 传递用户信息
+        if (User::isLogin()) {
+            $user = User::getInfo();
+            $this->assign('user', $user);
+        }
         return $this->fetch();
     }
 }
