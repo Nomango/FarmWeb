@@ -31,7 +31,7 @@
                     <p class="card_nav_p">{$order.number}</p>
                     <p class="card_nav_p">{$order.total}</p>
                     <p class="card_nav_p">{$order.user.nickname}</p>
-                    <p class="card_nav_p" id="order_state" >
+                    <p class="card_nav_p state" style="cursor: pointer;color: #2ca02c" onclick="sendGoods({$order.id})">
                         {if condition="$order.state eq 0"}发货
                         {elseif condition="$order.state eq 1"}正在处理
                         {elseif condition="$order.state eq 2"}交易完成
@@ -49,12 +49,16 @@
 </div>
 </body>
 <script>
-    var value = $("#order_state").html();
-    if( $.trim(value) == "发货"){
-        $("#order_state").css("cursor","pointer");
-        $("#order_state").css("color","#2ca02c");
-        $("#order_state").click(function () {
-            alert("ss")
+    function sendGoods(id) {
+        $.ajax({
+            url: '{:url("sendGoods")}',
+            data: {id: id},
+            success: function (result) {
+                if(result.code == 1){
+                    window.location.reload();
+                }
+                alert(result.msg);
+            }
         })
     }
 </script>

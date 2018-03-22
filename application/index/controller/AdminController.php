@@ -112,4 +112,26 @@ class AdminController extends Controller
         }
         return "";
     }
+
+    public function sendGoods(){
+        $id = Request::instance()->param('id/d');
+        $order = Order::where('id','=',$id)->find();
+        if($order['state'] == 0){
+            Order::where('id','=',$id)->setField('state',1);
+            return json([
+                'code' =>'1',
+                'msg' =>'发货成功'
+            ]);
+        }
+        else if($order['state']==1){
+            return json([
+                'code' =>'2',
+                'msg' =>'正在路上~'
+            ]);
+        }
+        return json([
+            'code' =>'3',
+            'msg' =>'该订单已完成'
+        ]);
+    }
 }
