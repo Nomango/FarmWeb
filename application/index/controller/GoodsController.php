@@ -78,13 +78,14 @@ class GoodsController extends Controller
 
     public function purchase()
     {
-        //获取购买商品的id
-        $id = Request::instance()->param('id/d');
-        $number = Request::instance()->param('number/d');
-        $goods = Goods::where('id','=',$id)->find();
-        $total = $number * $goods['price'];
-        // 传递用户信息
+        // 判断用户是否登录
         if (User::isLogin()) {
+            //获取购买商品的id
+            $id = Request::instance()->param('id/d');
+            $number = Request::instance()->param('number/d');
+            $goods = Goods::where('id','=',$id)->find();
+            $total = $number * $goods['price'];
+            // 获取用户信息
             $user = User::getInfo();
             $this->assign([
                 'number' =>$number,
@@ -95,8 +96,9 @@ class GoodsController extends Controller
             $this->assign('user', $user);
         }
         else{
-           redirect(url('Login/index'))->remember();
+           return $this->redirect(url('Login/index'));
         }
+
         return $this->fetch();
     }
 
