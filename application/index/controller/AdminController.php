@@ -96,6 +96,27 @@ class AdminController extends Controller
         $this->redirect(url('Admin/goodsmanage'));
     }
 
+    public function changeGoods()
+    {
+        $postData = Request::instance()->param();
+        $id = Request::instance()->param('id/d');
+        $goods = Goods::get($id);
+        $postData['image'] = $this->upload();
+        if (is_null($postData['image'])) {
+            $postData['image'] = $goods['image'];
+        }
+        $goods['name'] = $postData['name'];
+        $goods['image'] = $postData['image'];
+        $goods['price'] = $postData['price'];
+        $goods['number'] = $postData['number'];
+        $goods['description'] = $postData['description'];
+        $goods['content'] = $postData['content'];
+        $goods['category_id'] = $postData['category_id'];
+        $goods->save();
+
+        $this->redirect(Request::instance()->server()['HTTP_REFERER']);
+    }
+
     public function upload()
     {
         // 获取表单上传文件 例如上传了001.jpg
@@ -111,7 +132,7 @@ class AdminController extends Controller
                 echo $file->getError();
             }
         }
-        return "";
+        return null;
     }
 
     public function sendGoods(){
