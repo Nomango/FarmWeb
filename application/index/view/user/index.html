@@ -134,6 +134,12 @@
         check(sex);
         check(email);
         if(check(nickname)&&check(sex)&&check(email)){
+            if(sex=="男"){
+                sex = 0
+            }
+            else{
+                sex =1
+            }
             $.ajax({
                 url:'{:url("resetinfo")}',
                 data:{nickname:nickname,sex:sex,email:email},
