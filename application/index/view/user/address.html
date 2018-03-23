@@ -83,11 +83,9 @@
 <section class="personal">
     <div class="personal_nav">
         <p class="personal_nav_p_bold">账号管理</p>
-        <P class="personal_nav_p">安全设置</P>
-        <P class="personal_nav_p">个人资料</P>
-        <P class="personal_nav_p">密码修改</P>
-        <P class="personal_nav_p">个人交易信息</P>
-        <P class="personal_nav_p" style="color: #9ccc65">收货地址</P>
+        <a class="personal_nav_p"  href="{:url('User/index')}">个人资料</a>
+        <a class="personal_nav_p">个人交易信息</a>
+        <a href="{:url('User/address')}" class="personal_nav_p" style="color: #9ccc65">收货地址</a>
     </div>
     <div class="personal_address">
         <p class="personal_address_p">收货地址</p>
@@ -99,36 +97,85 @@
             <p class="personal_address_info_p">电话</p>
             <p class="personal_address_info_p">操作</p>
         </div>
+        {eq name="$msg" value="2"}
         <div class="personal_address_info info">
-            <p class="personal_address_info_p">吴皇呈</p>
-            <p class="personal_address_info_p">四川省成都市双流区西航港大道</p>
-            <p class="personal_address_info_p">四川省成都市双流区西航港大道</p>
-            <p class="personal_address_info_p">610200</p>
-            <p class="personal_address_info_p">15882418254</p>
+            <p class="personal_address_info_p" id="nickname">{$user.nickname}</p>
+            <p class="personal_address_info_p" id="area">{$user.area}</p>
+            <p class="personal_address_info_p" id="address">{$user.address}</p>
+            <p class="personal_address_info_p" id="zipcode">{$user.zipcode}</p>
+            <p class="personal_address_info_p" id="phone">{$user.phone}</p>
             <p class="personal_address_info_p" onclick="change()" style="color: #2e6da4;cursor:pointer;">修改</p>
         </div>
+        {else /}
+        <div class="personal_address_info info" style="margin-top: 40px">
+            <div style="width: 250px;margin: auto">
+                <span>您还没有收货地址,点击</span>
+                <span onclick="change()" style="color: #2e6da4;cursor:pointer;width: 100px;height: 30px;">新增</span>
+                <span>一个地址</span>
+            </div>
+        </div>
+        {/eq}
     </div>
 </section>
 
 {include file="layout/footer" /}
 </body>
 <script>
+    layui.use('layer');
     function change() {
         var content = '<div class="box">' +
-            '<div class="personal_content_list"><p class="list_p">收货人:</p><input class="list_second input"></div>' +
-            '<div class="personal_content_list"><p class="list_p">所在地区:</p><input class="list_second input"></div>' +
-        '<div class="personal_content_list"><p class="list_p">详细地址:</p><input class="list_second input"></div>' +
-        '<div class="personal_content_list"><p class="list_p">邮编:</p><input class="list_second input"></div>' +
-        '<div class="personal_content_list"><p class="list_p">电话:</p><input class="list_second input"></div>' +
+            '<div class="personal_content_list"><p class="list_p">收货人:</p><input class="list_second input" id="re_nickname"></div>' +
+            '<div class="personal_content_list"><p class="list_p">所在地区:</p><input class="list_second input" id="re_area"></div>' +
+        '<div class="personal_content_list"><p class="list_p">详细地址:</p><input class="list_second input" id="re_address"></div>' +
+        '<div class="personal_content_list"><p class="list_p">邮编:</p><input class="list_second input" id="re_zipcode"></div>' +
+        '<div class="personal_content_list"><p class="list_p">电话:</p><input class="list_second input" id="re_phone"></div>' +
         '</div>';
-        layer.open({
+        //alert(a)
+     //   alert( )
+        layui.layer.open({
+
             title: '修改收货地址',
             content: content,
             area: ['480px', '500px'],
-            btn: ['确认', '取消']
+            btn: ['确认', '取消'],
+            yes:function () {
+              //  var nickname = $("#re_nickname").val();
+                var $nickname = $.trim($("#re_nickname").val());
+                var $area = $.trim($("#re_area").val());
+                var $address = $.trim($("#re_address").val());
+                var $zipcode = $.trim($("#re_zipcode").val());
+                var $phone = $.trim($("#re_phone").val());
+                check($.trim($nickname));
+                check($.trim($area));
+                check($.trim($address));
+                check($.trim($zipcode));
+                check($.trim($phone));
+                if(check($nickname)&&check($area)&&check(($address)&&check($zipcode)&&check($phone))){
+                    $.ajax({
+                        url: '{:url("resetaddress")}',
+                        data:{nickname:$nickname,area:$area,address:$address,zipcode:$zipcode,phone:$phone},
+                        success:function () {
+                            window.location.reload();
+                        }
+                    })
+                }
+                else {
+                    alert("输入框内容不能为空")
+                }
+            }
         }, function () {
-            // 点击确认后
         });
+        function check(value) {
+            if(value ==""){
+                return false;
+            }
+            return true;
+        }
+        $("#re_nickname").attr("value",$("#nickname").text());
+        $("#re_area").attr("value",$("#area").text());
+        $("#re_address").attr("value",$("#address").text());
+        $("#re_zipcode").attr("value",$("#zipcode").text());
+        $("#re_phone").attr("value",$("#phone").text());
     }
     window.onresize = function(){
         window.location.reload()

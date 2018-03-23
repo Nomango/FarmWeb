@@ -11,6 +11,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use app\common\model\User;
+use think\Request;
 
 class UserController extends Controller
 {
@@ -37,8 +38,16 @@ class UserController extends Controller
     public function address()
     {
         $user = User::getInfo();
+        if($user['address']==""){
+            $this->assign([
+               'user' =>$user,
+               'msg' =>'1'
+            ]);
+            return $this->fetch();
+        }
         $this->assign([
             'user' => $user,
+            'msg' =>'2'
         ]);
         return $this->fetch();
     }
@@ -50,5 +59,29 @@ class UserController extends Controller
             'user' => $user,
         ]);
         return $this->fetch();
+    }
+
+    public function resetaddress(){
+        $user = User::getInfo();
+        $user['nickname'] = Request::instance()->param('nickname');
+        $user['area'] = Request::instance()->param('area');
+        $user['address'] = Request::instance()->param('address');
+        $user['zipcode'] = Request::instance()->param('zipcode');
+        $user['phone'] = Request::instance()->param('phone');
+        $user->validate()->save();
+        return json([
+           'msg' =>"修改成功"
+        ]);
+    }
+
+    public function resetinfo(){
+        $user = User::getInfo();
+        $user['nickname'] = Request::instance()->param('nickname');
+        $user['sex'] = Request::instance()->param('sex');
+        $user['email'] = Request::instance()->param('email');
+        $user->validate()->save();
+        return json([
+            'code' =>'1'
+        ]);
     }
 }

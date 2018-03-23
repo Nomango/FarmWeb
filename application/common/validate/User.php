@@ -19,4 +19,5 @@ class User extends Validate
         'sex' => 'in:0,1',
         'email' => 'email',
     ];
+
 }

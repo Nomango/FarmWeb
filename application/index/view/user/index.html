@@ -84,8 +84,7 @@
 <section class="personal">
     <div class="personal_nav">
         <p class="personal_nav_p_bold">账号管理</p>
-        <a class="personal_nav_p" style="color: #9ccc65">个人资料</a>
-        <a class="personal_nav_p">密码修改</a>
+        <a class="personal_nav_p" style="color: #9ccc65"  href="{:url('User/index')}">个人资料</a>
         <a class="personal_nav_p">个人交易信息</a>
         <a href="{:url('User/address')}" class="personal_nav_p">收货地址</a>
     </div>
@@ -97,23 +96,25 @@
             <div class="personal_content_content">
                 <div class="personal_content_list">
                     <p class="list_p">账号:</p>
-                    <span class="list_second">locust</span>
+                    <span class="list_second">{$user.username}</span>
                 </div>
                 <div class="personal_content_list">
                     <p class="list_p">姓名:</p>
-                    <input class="list_second input">
+                    <input class="list_second input" value="{$user.nickname}" id="nickname">
                 </div>
                 <div class="personal_content_list">
                     <p class="list_p">性别:</p>
-                    <input name="sex" type="radio" value="男" style="margin-left: 10px" />男 </label>
-                    <input name="sex" type="radio" value="女" style="margin-left: 10px"/>女 </label>
+                    <select  style="margin-left: 10px" id="sex">
+                        <option {eq name="$user.sex" value="0"}selected="selected"{/eq} style="margin-left: 10px">男</option>
+                        <option {eq name="$user.sex" value="1"}selected="selected"{/eq}  style="margin-left: 10px">女</option>
+                    </select>
                 </div>
                 <div class="personal_content_list">
                     <p class="list_p">邮箱:</p>
-                    <input class="list_second input" type="email">
+                    <input class="list_second input" type="email" value="{$user.email}" id="email">
                 </div>
 
-                <button class="sub_btn">保存</button>
+                <button class="sub_btn" onclick="save()">保存</button>
             </div>
         </div>
     </div>
@@ -125,5 +126,31 @@
     var box_width = $("#personal_content_box").width();
     var line_width = box_width - 151;
     $("#line_3").width(line_width);
+    function save() {
+        var nickname = $.trim($("#nickname").val());
+        var sex = ($("#sex").find("option:selected").text())
+        var email = $.trim($("#email").val());
+        check(nickname);
+        check(sex);
+        check(email);
+        if(check(nickname)&&check(sex)&&check(email)){
+            $.ajax({
+                url:'{:url("resetinfo")}',
+                data:{nickname:nickname,sex:sex,email:email},
+                success:function () {
+                    window.location.reload()
+                }
+            })
+        }
+        else {
+            alert("修改内容不能为空")
+        }
+        function check(value) {
+            if(value ==""){
+                return false;
+            }
+            return true;
+        }
+    }
 </script>
 </html>
