@@ -49,15 +49,22 @@
 </div>
 </body>
 <script>
+    layui.use('layer');
     function sendGoods(id) {
+        var msgIndex = layui.layer.msg('正在处理...', {time:-1, shade: 0.3});
         $.ajax({
             url: '{:url("sendGoods")}',
             data: {id: id},
             success: function (result) {
+                layui.layer.close(msgIndex);
                 if(result.code == 1){
-                    window.location.reload();
+                    layui.layer.alert('发货成功！', {
+                        icon: 1,
+                        end: function () {window.location.reload();}
+                    });
+                } else {
+                    layui.layer.msg(result.msg, {icon: 2});
                 }
-                alert(result.msg);
             }
         })
     }

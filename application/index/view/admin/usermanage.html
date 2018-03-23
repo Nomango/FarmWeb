@@ -45,23 +45,25 @@
 </div>
 </div>
 <script>
+    layui.use('layer');
+
     function user_delete(id) {
         // 询问框
-        layer.confirm('确认要删除该用户吗？', {
+        layui.layer.confirm('确认要删除该用户吗？', {
             btn: ['删除','取消']
         }, function() {
-            var msgIndex = layer.msg('正在删除...', {time:-1, shade: 0.3});
+            var msgIndex = layui.layer.msg('正在删除...', {time:-1, shade: 0.3});
             $.ajax({
                 data: { id: id },
                 url:'{:url("deleteUser")}',
                 success: function (data) {
-                    layer.close(msgIndex);
+                    layui.layer.close(msgIndex);
                     if (data['result']) {
-                        layer.msg('删除成功', {icon: 1});
+                        layui.layer.msg('删除成功', {icon: 1});
                         $('#user-' + id).remove();
                     }
                     else {
-                        layer.msg(data['msg'], {icon: 2});
+                        layui.layer.msg(data['msg'], {icon: 2});
                     }
                 }
             });

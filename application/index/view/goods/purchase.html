@@ -60,7 +60,7 @@
         }
         .content_p2{
             color: #000000;
-            line-height: 50px;
+            line-height: 40px;
             float: right;
             font-size: 18px;
         }
@@ -160,11 +160,15 @@
                         content: '支付成功',
                         yes: function() {
                             window.location.href = '{:url("User/orders")}'
-                        }//如果设定了yes回调，需进行手工关闭
+                        }
                     });
                 }
+                else if(data['code'] ==1){
+
+                    window.location.href = "{:url('User/address')}";
+                }
                 else{
-                    alert(data['msg']);
+                    layui.layer.msg(data['msg'], {icon: 2});
                 }
             }
         });

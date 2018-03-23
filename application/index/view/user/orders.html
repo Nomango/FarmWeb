@@ -4,14 +4,151 @@
     <meta charset="UTF-8">
     <title>订单管理</title>
     {include file="layout/head" /}
+    <link rel="stylesheet" href="__CSS__/page.css">
+    <style>
+        .box{
+            width: 800px;
+            margin: 20px auto 20px;
+            background-color: #FFFFFF;
+            padding-bottom: 40px;
+        }
+        .box_div{
+            width: 100%;
+            height: 80px;
+        }
+        .p1{
+            font-size: 18px;
+            text-align: center;
+            width: 100px;
+            line-height: 80px;
+            border-bottom:2px solid #8BC34A ;
+            color: #8BC34A;
+        }
+        .list_p{
+            height: 100%;
+            line-height: 60px;
+            width: 110px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+        }
+        .p2{
+            font-size: 14px;
+            text-align: center;
+        }
+        .list_p1{
+            line-height: 100px;
+        }
+        .delete_btn{
+            float: right;
+            display: inline-block;
+            margin-right: 30px;
+            margin-top: 12px;
+            cursor: pointer;
+        }
+        .pager{
+            padding-right: 30px;
+        }
+    </style>
 </head>
 <body>
 {include file="layout/header" /}
 
-<div>
-    订单管理
+<div class="box">
+    <div class="box_div" style="border-bottom:2px solid #EEEEEE ;">
+        <p class="p1">所有订单</p>
+    </div>
+    <div class="box_div" style="height: 40px"></div>
+    <div class="box_div" style="height: 60px;background-color: #BDBDBD">
+        <p class="list_p"></p>
+        <p class="list_p">商品名称</p>
+        <p class="list_p">单价</p>
+        <p class="list_p">数量</p>
+        <p class="list_p">实付款</p>
+        <p class="list_p">交易状态</p>
+        <p class="list_p">交易操作</p>
+    </div>
+    <div class="box_div" style="height: 30px"></div>
+    {volist name="orders" id="order"}
+    <div class="box_div" style="height: auto">
+        <div class="box_div" style="height: 40px;background-color: #EEEEEE">
+            <p class="p2" style="width: 110px;line-height: 40px;display: inline-block">{$order.create_time}</p>
+            <img src="__STATIC__/image/delete.png" class="delete_btn" onclick="deleteorder({$order.id})">
+        </div>
+        <div style="height: 100px">
+            <div class="list_p list_p1">
+                <img  src="__IMAGE__/{$order.goods.image}" style="width: 80px;height: 80px">
+            </div>
+            <p class="list_p list_p1">{$order.goods.name}</p>
+            <p class="list_p list_p1">{$order.price}</p>
+            <p class="list_p list_p1">{$order.number}</p>
+            <p class="list_p list_p1">{$order.total}</p>
+            <p class="list_p list_p1">
+                {if condition="$order.state eq 0"}未发货
+                {elseif condition="$order.state eq 1"}正在路上
+                {elseif condition="$order.state eq 2"}交易完成
+                {else /}错误
+                {/if}
+            </p>
+            <p class="list_p list_p1" style="color: #2ca02c;cursor:pointer;" onclick="confirmorder({$order.id})">
+                {if condition="$order.state eq 0"}确认收货
+                {elseif condition="$order.state eq 1"}确认收货
+                {elseif condition="$order.state eq 2"}交易完成
+                {else /}错误
+                {/if}
+            </p>
+        </div>
+    </div>
+    {/volist}
+    <div style="width: 100%;height: 10%;">
+        {$orders->render()}
+    </div>
 </div>
 
 {include file="layout/footer" /}
 </body>
+<script>
+    function confirmorder(id) {
+        $.ajax({
+            url:'{:url("confirmorder")}',
+            data:{id:id},
+            success:function (result) {
+                if(result.code == "3"){
+                }
+                else{
+                    alert(result.msg)
+                    window.location.reload()
+                }
+            }
+        })
+    }
+
+
+
+    layui.use('layer');
+
+    function deleteorder(id) {
+        // 询问框
+        layui.layer.confirm('确认要删除该订单吗？', {
+            btn: ['删除','取消']
+        }, function() {
+            var msgIndex = layui.layer.msg('正在删除...', {time:-1, shade: 0.3});
+            $.ajax({
+                data: { id: id },
+                url:'{:url("deleteorder")}',
+                success: function (data) {
+                    layui.layer.close(msgIndex);
+                    if (data['result']) {
+                        layui.layer.msg('删除成功', {icon: 1});
+                        $('#user-' + id).remove();
+                    }
+                    else {
+                        layui.layer.msg(data['msg'], {icon: 2});
+                    }
+                    window.location.reload();
+                }
+            });
+        });
+    }
+</script>
 </html>

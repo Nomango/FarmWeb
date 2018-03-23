@@ -108,8 +108,11 @@ class GoodsController extends Controller
         $number = Request::instance()->param('number/d');
         $user = User::getInfo();
         $goods = Goods::where('id','=',$id)->find();
+        if($user['phone']==""||$user['address']==""){
+            return json(['result'=>false,'msg'=>'请填写地址或手机号','code'=>'1']);
+        }
         if($number > $goods['number']){
-            return json(['result'=>false, 'msg'=>'抱歉，库存不足！']);
+            return json(['result'=>false, 'msg'=>'抱歉，库存不足！','code'=>'2']);
         }
         $newNumber = $goods['number'] - $number;
         Goods::where('id','=',$id)->setField('number',$newNumber);

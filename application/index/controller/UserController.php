@@ -9,6 +9,7 @@
 namespace app\index\controller;
 
 
+use app\common\model\Order;
 use think\Controller;
 use app\common\model\User;
 use think\Request;
@@ -55,8 +56,11 @@ class UserController extends Controller
     public function orders()
     {
         $user = User::getInfo();
+        $orders = Order::with(['goods'])->where('user_id','=',$user['id'])->order('create_time desc')->paginate('5','true');
+       // return json($orders);
         $this->assign([
             'user' => $user,
+            'orders' =>$orders
         ]);
         return $this->fetch();
     }
@@ -82,6 +86,46 @@ class UserController extends Controller
         $user->validate()->save();
         return json([
             'code' =>'1'
+        ]);
+    }
+
+
+    public function confirmorder(){
+        $id = Request::instance()->param('id/d');
+        $order = Order::where('id','=',$id)->find();
+        if($order['state']==0){
+            Order::where('id','=',$id)->setField('state',2);
+            return json([
+               'code' => '1',
+               'msg' => '收货成功'
+            ]);
+        }
+        else if($order['state']==1){
+            Order::where('id','=',$id)->setField('state',2);
+            return json([
+                'code' => '2',
+                'msg' => '收货成功'
+            ]);
+        }
+        return json([
+            'code' => '3',
+            'msg' => '改单已完成'
+        ]);
+    }
+
+    public function deleteorder(){
+        $id = Request::instance()->param('id/d');
+        $order = Order::where('id','=',$id)->find();
+        if(!$order){
+            return json([
+                'result' => false,
+                'msg' => '该订单不存在'
+            ]);
+        }
+        Order::where('id','=',$id)->delete();
+        return json([
+           'result' => true,
+           'msg' =>'删除成功'
         ]);
     }
 }

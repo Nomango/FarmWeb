@@ -48,6 +48,7 @@
         }
         .goods-content-box {
             width: 100%;
+            word-break: break-all;
         }
         .goods-content-title {
             font-size: 24px;
@@ -172,7 +173,7 @@
     function addNumber() {
         var oNumber = $('#buy-number');
         var n = parseInt(oNumber.text());
-        if (n < 99) {
+        if (n < {$goods.number}) {
             n++;
         }
         oNumber.html(n);

@@ -32,7 +32,7 @@ class AdminController extends Controller
     public function index()
     {
         $Order = new Order;
-        $orders = $Order->with(['user','goods'])->paginate(5,true);
+        $orders = $Order->with(['user','goods'])->order('create_time desc')->paginate(5,true);
         $this->assign([
             'orders'=> $orders,
             'index'=> 1
