@@ -158,8 +158,9 @@ body{
     outline: none;
 }
 .commodity_add{
-    margin-bottom: 14px;
+
     vertical-align: bottom;
+    margin-bottom: 70px;
     width: 100px;
     height: 27px;
     margin-left: 5%;

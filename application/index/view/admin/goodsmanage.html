@@ -51,17 +51,29 @@
             text-align: left;
             margin-left: 15px;
         }
+        .textarea{
+            width: 200px;
+            height: 100px;
+            resize: none;
+        }
+        .popup_box{
+            position: absolute;
+            width: 884px;
+            height: 300px;
+            top: 300px;
+            background-color: #2ca02c;
+        }
     </style>
 </head>
 <body>
-<div class="admin_box">
+<div class="admin_box" style="height: 800px">
     {include file="layout/admin_bar" /}
     <div class="content">
     <div class="card" style="display: block">
-        <div style="display: block;width: 100%;height: 100%" id="commodity_list">
+        <div style="display: block;width: 100%;height: 100%;position:relative;" id="commodity_list">
             <div style="width: 100%;height: 90%">
                 <form action="{:url('Admin/addGoods')}" enctype="multipart/form-data" method="post">
-                    <div class="card_title">
+                    <div class="card_title" style="height: 300px">
                         <div class="commodity_list">
                             <a href="javascript:void(0)" class="file" style="cursor: pointer">选择文件
                                 <input type="file" name="image" id="file_input" style="cursor: pointer">
@@ -88,7 +100,15 @@
                                 <option value="3">农副产品</option>
                             </select>
                         </div>
-                        <button type="submit" class="commodity_add" id="commodity_add">上架</button>
+                        <div class="commodity_list">
+                            <p class="commodity_list_p">产品描述:</p>
+                            <input type="text" class="commodity_list_input" name="description">
+                        </div>
+                        <div class="commodity_list" style="width: 270px;height: 150px">
+                            <p class="commodity_list_p" style="vertical-align: top;line-height: 150px" >产品详情:</p>
+                            <textarea type="text" class="commodity_list_input textarea" name="content"></textarea>
+                        </div>
+                        <button type="submit" class="commodity_add" id="commodity_add" >上架</button>
                     </div>
                 </form>
                 <div class="card_nav">
@@ -118,6 +138,47 @@
             <div style="width: 100%;height: 10%;">
                 {$goods->render()}
             </div>
+        </div>
+        <div class="popup_box">
+            <form action="" enctype="multipart/form-data" method="post">
+                <div class="card_title" style="height: 300px">
+                    <div class="commodity_list">
+                        <a href="javascript:void(0)" class="file" style="cursor: pointer">选择文件
+                            <input type="file" name="image" id="file_input" style="cursor: pointer">
+                        </a>
+                        <div style="display: inline-block;width: 60px;height: 60px" class="commodity_list_p choose_img" id="image"></div>
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品名称:</p>
+                        <input type="text" class="commodity_list_input" name="name">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品价格:</p>
+                        <input type="text" class="commodity_list_input" name="price">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品数量:</p>
+                        <input type="text" class="commodity_list_input" name="number">
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品类型:</p>
+                        <select class="select2_test" style="height: 25px;width: 120px;margin-top: 20px;text-indent: 10px" name="category_id">
+                            <option value="1">旅游产品</option>
+                            <option value="2">手工制品</option>
+                            <option value="3">农副产品</option>
+                        </select>
+                    </div>
+                    <div class="commodity_list">
+                        <p class="commodity_list_p">产品描述:</p>
+                        <input type="text" class="commodity_list_input" name="description">
+                    </div>
+                    <div class="commodity_list" style="width: 270px;height: 150px">
+                        <p class="commodity_list_p" style="vertical-align: top;line-height: 150px" >产品详情:</p>
+                        <textarea type="text" class="commodity_list_input textarea" name="content"></textarea>
+                    </div>
+                    <button type="submit" class="commodity_add" id="commodity_change" >上架</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

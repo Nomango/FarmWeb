@@ -90,7 +90,8 @@ class AdminController extends Controller
         $goods['number'] = $postData['number'];
         $goods['image'] = $this->upload();
         $goods['category_id'] = $postData['category_id'];
-
+        $goods['description'] = $postData['description'];
+        $goods['content'] = $postData['content'];
         $goods->save();
         $this->redirect(url('Admin/goodsmanage'));
     }
